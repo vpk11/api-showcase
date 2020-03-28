@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The first thing in any HTML file should be the charset -->
+    <meta charset="utf-8">
+    <!-- Make the page mobile compatible -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Showcase</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <!-- Display a message if JS has been disabled on the browser. -->
+    <noscript>If you're seeing this message, that means
+      <strong>JavaScript has been disabled on your browser</strong>, please
+      <strong>enable JS</strong> to make this app work.
+    </noscript>
+    <%= react_component('ShowcaseNav', {username: 'Kuttu'}) %>
+    <%= yield %>
+  </body>
+</html>
