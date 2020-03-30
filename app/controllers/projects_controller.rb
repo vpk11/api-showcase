@@ -3,6 +3,7 @@
 # Controller to manage requests to projects
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @projects = Project.includes(:versions).active
+    
   end
 end
