@@ -1,2 +1,4 @@
 
-<%= react_component('ProjectIndex', {projectId: @project.id, projectName: @project.name}) %>
+<% @projects.each do |project| %>
+  <%= react_component('ProjectIndex', {projectId: project.id, projectName: project.name, versions: project.version_details}) %>
+<% end %>
