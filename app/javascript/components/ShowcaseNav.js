@@ -37,7 +37,7 @@ class ShowcaseNav extends React.Component {
 }
 
 ShowcaseNav.propTypes = {
-  username: PropTypes.string,
+  username: PropTypes.string.isRequired,
 }
 
 export default ShowcaseNav

@@ -12,8 +12,8 @@ class VersionsList extends React.Component {
 }
 
 VersionsList.propTypes = {
-  versionId: PropTypes.number,
-  versionName: PropTypes.string,
+  versionId: PropTypes.number.isRequired,
+  versionName: PropTypes.string.isRequired,
 }
 
 export default VersionsList
