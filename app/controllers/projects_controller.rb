@@ -12,6 +12,17 @@ class ProjectsController < ApplicationController
   end
 
   def create
-
+    project = Project.new(
+      name: params[:name],
+      description: params[:description],
+      user_id: params[:user_id],
+      account_id: params[:account_id]
+    )
+    if project.save!
+      redirect_to projects_path
+    else
+      @user = User.find(params[:user_id])
+      @account = @user.account
+    end
   end
 end
