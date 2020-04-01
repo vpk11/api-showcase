@@ -40,9 +40,9 @@ class ProjectIndex extends React.Component {
 }
 
 ProjectIndex.propTypes = {
-  projectId: PropTypes.number,
-  projectName: PropTypes.string,
-  versions: PropTypes.array,
+  projectId: PropTypes.number.isRequired,
+  projectName: PropTypes.string.isRequired,
+  versions: PropTypes.array.isRequired,
 }
 
 export default ProjectIndex
