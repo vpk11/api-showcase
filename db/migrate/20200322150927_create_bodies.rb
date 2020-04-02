@@ -10,6 +10,7 @@ class CreateBodies < ActiveRecord::Migration[6.0]
       t.text :graphql_query
       t.text :graphql_variable
       t.text :description
+      t.integer :api_id
 
       t.timestamps
     end

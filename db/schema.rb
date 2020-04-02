@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_03_22_151740) do
     t.text "graphql_query"
     t.text "graphql_variable"
     t.text "description"
+    t.integer "api_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -72,6 +73,8 @@ ActiveRecord::Schema.define(version: 2020_03_22_151740) do
 
   create_table "responses", force: :cascade do |t|
     t.text "data"
+    t.string "code"
+    t.string "status"
     t.integer "api_id"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false

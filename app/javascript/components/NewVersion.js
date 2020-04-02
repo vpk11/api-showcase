@@ -56,8 +56,8 @@ class NewVersion extends React.Component {
 }
 
 NewVersion.propTypes = {
-  projectId: PropTypes.number,
-  projectName: PropTypes.string,
+  projectId: PropTypes.number.isRequired,
+  projectName: PropTypes.string.isRequired,
 }
 
 export default NewVersion
