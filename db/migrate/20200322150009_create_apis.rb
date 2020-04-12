@@ -7,6 +7,7 @@ class CreateApis < ActiveRecord::Migration[6.0]
       t.string :method
       t.string :end_point
       t.boolean :archived, deault: false
+      t.text :description
       t.integer :version_id
 
       t.timestamps

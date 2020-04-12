@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_22_151740) do
     t.string "method"
     t.string "end_point"
     t.boolean "archived"
+    t.text "description"
     t.integer "version_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
