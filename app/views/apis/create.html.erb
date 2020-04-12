@@ -1,1 +1,9 @@
-<%= react_component('NewApi', {methods: @methods, versionId: @version.id, versionName: @version.name, api: @api}) %>
+<%= react_component(
+  'NewApi', 
+  {
+    methods: @methods, versionId: @version.id, 
+    versionName: @version.name, api: @api,
+    errors: @api.errors.full_messages
+  }
+  ) 
+%>

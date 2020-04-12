@@ -10,7 +10,8 @@ class ApisController < ApplicationController
   def create
     @api = Api.new(
       method: params[:method], end_point: params[:end_point],
-      description: params[:description], version_id: params[:version_id]
+      description: params[:description], version_id: params[:version_id],
+      archived: params[:archived]
     )
     if @api.save
       redirect_to api_path(@api.reload)
