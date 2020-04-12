@@ -70,7 +70,8 @@ class NewApi extends React.Component {
                   />
                 </Card.Body>
               </Card>
-              <input type="hidden" name="verion_id" value={this.props.versionId} />
+              <input type="hidden" name="version_id" value={this.props.versionId} />
+              <input type="hidden" name="archived" value={false} />
               <CsrfInput />
               <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
             </Form>
