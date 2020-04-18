@@ -16,4 +16,13 @@ class ApisController < ApplicationController
       @methods = Api::METHODS
     end
   end
+
+  def show
+    @api = Api.find(params[:id])
+    @version = @api.version
+    @parameters = @api.params
+    @headers = @api.headers
+    @bodies = @api.bodies
+    @responses = @api.responses
+  end
 end
