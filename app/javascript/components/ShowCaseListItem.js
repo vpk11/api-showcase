@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import ListGroup from 'react-bootstrap/ListGroup'
-class VersionsList extends React.Component {
+class ShowCaseListItem extends React.Component {
   render () {
     return (
       <ListGroup.Item>
@@ -11,9 +11,9 @@ class VersionsList extends React.Component {
   }
 }
 
-VersionsList.propTypes = {
-  versionId: PropTypes.number.isRequired,
-  versionName: PropTypes.string.isRequired,
+ShowCaseListItem.propTypes = {
+  itemId: PropTypes.number.isRequired,
+  itemName: PropTypes.string.isRequired,
 }
 
-export default VersionsList
+export default ShowCaseListItem

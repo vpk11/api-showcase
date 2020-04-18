@@ -1,0 +1,15 @@
+<%= react_component(
+  'ShowApi', 
+  {
+    api: @api,
+    version: @version,
+    params: @parameters,
+    showParams: @parameters.present?,
+    headers: @headers,
+    showHeaders: @headers.present?,
+    bodies: @bodies,
+    showBodies: @bodies.present?,
+    responses: @responses,
+    showResponses: @responses.present?
+  })
+%>
