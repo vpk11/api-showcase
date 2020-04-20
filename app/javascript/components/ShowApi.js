@@ -45,13 +45,13 @@ class ShowApi extends React.Component {
                 </div>
 
                 <CardDeck>
-                  <ApiDetailsCard cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} />
+                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} />
 
-                  <ApiDetailsCard cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} />
+                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} />
 
-                  <ApiDetailsCard cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} />
+                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} />
 
-                  <ApiDetailsCard cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} />
+                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} />
                 </CardDeck>
               </Card.Body>
             </Card>
