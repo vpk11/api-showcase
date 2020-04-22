@@ -45,13 +45,13 @@ class ShowApi extends React.Component {
                 </div>
 
                 <CardDeck>
-                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} />
+                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} apiId={this.props.api.id} />
 
-                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} />
+                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} apiId={this.props.api.id} />
 
-                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} />
+                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} apiId={this.props.api.id} />
 
-                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} />
+                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} apiId={this.props.api.id} />
                 </CardDeck>
               </Card.Body>
             </Card>
@@ -68,13 +68,9 @@ ShowApi.propTypes = {
   api: PropTypes.object.isRequired,
   version: PropTypes.object.isRequired,
   params: PropTypes.array,
-  showHeaders: PropTypes.bool,
   headers: PropTypes.array,
-  showHeaders: PropTypes.bool,
   bodies: PropTypes.array,
-  showBodies: PropTypes.bool,
   responses: PropTypes.array,
-  showResponses: PropTypes.bool,
 }
 
 export default ShowApi

@@ -4,14 +4,15 @@ import ListGroup from 'react-bootstrap/ListGroup'
 class ShowCaseListItem extends React.Component {
   render () {
     return (
-      <ListGroup.Item>
-        {this.props.versionName}
+      <ListGroup.Item style={this.props.style}>
+        {this.props.itemName}
       </ListGroup.Item>
     );
   }
 }
 
 ShowCaseListItem.propTypes = {
+  style: PropTypes.object,
   itemId: PropTypes.number.isRequired,
   itemName: PropTypes.string.isRequired,
 }

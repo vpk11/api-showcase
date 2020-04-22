@@ -2,6 +2,9 @@ import React from "react"
 import PropTypes from "prop-types"
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import HeaderAndParamsForm from './HeaderAndParamsForm'
+import BodyForm from './BodyForm'
+import ResponseForm from './ResponseForm'
 class VerticallyCenteredModal extends React.Component {
   render() {
     return (
@@ -18,30 +21,11 @@ class VerticallyCenteredModal extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form action="/apis" method="POST" >
-            <FormTextField
-              controlId='KeyField'
-              label='Key' type='text'
-              placeholder='Key'
-              name='key'
-            />
-            <FormTextField
-              controlId='ValueObject'
-              label='Type' type='text'
-              placeholder='String|Integer|Boolean . . .'
-              name='value_object'
-            />
-            <FormTextArea
-              controlId='DescriptionField'
-              label='Description' type='textarea'
-              rows={2}
-              name='description'
-            />
-          </Form>
+          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' />}
+          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' />}
+          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} />}
+          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} />}
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
@@ -51,6 +35,8 @@ VerticallyCenteredModal.propTypes = {
   modalTitle: PropTypes.string,
   show: PropTypes.bool,
   onHide: PropTypes.func,
+  buttonID: PropTypes.string,
+  apiId: PropTypes.number
 }
 
 export default VerticallyCenteredModal
