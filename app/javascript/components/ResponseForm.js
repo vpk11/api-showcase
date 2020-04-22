@@ -1,19 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import FormTextField from './FormTextField'
 import FormTextArea from './FormTextArea'
-import Button from 'react-bootstrap/Button'
-import axios from 'axios'
-class HeaderAndParamsForm extends React.Component {
+
+class ResponseForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formData: { 
+      formData: {
         api_id: this.props.apiId,
-        form_for: this.props.formFor,
-        authenticity_token: $('meta[name="csrf-token"]').attr('content')
-      }
+        authenticity_token: $('meta[name="csrf-token"]').attr('content'),
+      },
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -26,12 +25,11 @@ class HeaderAndParamsForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     const form = new FormData()
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    axios.post(`/${this.props.formFor}`, form, {
+    axios.post('/responses', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
@@ -53,17 +51,24 @@ class HeaderAndParamsForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} >
         <FormTextField
-          controlId='KeyField'
-          label='Key' type='text'
-          placeholder='Key'
-          name='key'
+          controlId='Code'
+          label='Code' type='text'
+          placeholder='Eg: 200 | 404 | 500 . . .'
+          name='code'
           onChange={this.handleChange}
         />
         <FormTextField
-          controlId='ValueObject'
-          label='Type' type='text'
-          placeholder='String|Integer|Boolean . . .'
-          name='value_object'
+          controlId='Status'
+          label='Status' type='text'
+          placeholder='Eg: Success | Error | Forbidden . . .'
+          name='status'
+          onChange={this.handleChange}
+        />
+        <FormTextArea
+          controlId='DataField'
+          label='Data' type='textarea'
+          rows={4}
+          name='data'
           onChange={this.handleChange}
         />
         <FormTextArea
@@ -73,15 +78,14 @@ class HeaderAndParamsForm extends React.Component {
           name='description'
           onChange={this.handleChange}
         />
-        <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
+        <Button variant="dark" style={saveButtonStyle} type="submit" onClick={(e) => this.onSubmit(e)}>Save</Button>
       </Form>
     );
   }
 }
 
-HeaderAndParamsForm.propTypes = {
-  apiId: PropTypes.number,
-  formFor: PropTypes.string,
+ResponseForm.propTypes = {
+  apiId: PropTypes.number
 }
 
-export default HeaderAndParamsForm
+export default ResponseForm

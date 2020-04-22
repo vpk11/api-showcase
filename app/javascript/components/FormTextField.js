@@ -6,7 +6,7 @@ class FormTextField extends React.Component {
     return (
       <Form.Group controlId={this.props.controlId}>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} value={this.props.value} />
+        <Form.Control onChange={this.props.onChange} type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} value={this.props.value} />
       </Form.Group>
     );
   }
@@ -19,6 +19,7 @@ FormTextField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default FormTextField

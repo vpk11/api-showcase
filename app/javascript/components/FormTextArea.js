@@ -6,7 +6,7 @@ class FormTextArea extends React.Component {
     return (
       <Form.Group controlId={this.props.controlId}>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control as={this.props.type} rows={this.props.rows} name={this.props.name} value={this.props.value} />
+        <Form.Control onChange={this.props.onChange} as={this.props.type} rows={this.props.rows} name={this.props.name} value={this.props.value} />
       </Form.Group>
     );
   }
@@ -19,6 +19,7 @@ FormTextArea.propTypes = {
   rows: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 export default FormTextArea
