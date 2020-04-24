@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormTextField from './FormTextField'
 import FormTextArea from './FormTextArea'
+import axios from 'axios'
 
 class ResponseForm extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class ResponseForm extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const form = new FormData()
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
@@ -34,6 +36,7 @@ class ResponseForm extends React.Component {
     })
     .then((response) => {
       console.log(response);
+      this.props.handleItemsList(response.data)
     }, (error) => {
       console.log(error);
     });
@@ -78,14 +81,15 @@ class ResponseForm extends React.Component {
           name='description'
           onChange={this.handleChange}
         />
-        <Button variant="dark" style={saveButtonStyle} type="submit" onClick={(e) => this.onSubmit(e)}>Save</Button>
+        <Button variant="dark" style={saveButtonStyle} type="submit" >Save</Button>
       </Form>
     );
   }
 }
 
 ResponseForm.propTypes = {
-  apiId: PropTypes.number
+  apiId: PropTypes.number,
+  handleItemsList: PropTypes.func,
 }
 
 export default ResponseForm

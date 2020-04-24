@@ -5,6 +5,7 @@ import FormTextField from './FormTextField'
 import FormTextArea from './FormTextArea'
 import FormSelect from './FormSelect'
 import Button from 'react-bootstrap/Button'
+import axios from 'axios'
 class BodyForm extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,10 @@ class BodyForm extends React.Component {
       formData: {
         api_id: this.props.apiId,
         authenticity_token: $('meta[name="csrf-token"]').attr('content'),
+        body_type: 'none',
+        data_type: 'Text',
       },
+      bodyType: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,9 +26,14 @@ class BodyForm extends React.Component {
     const data = {};
     data[event.target.name] = event.target.value;
     this.setState({ formData: { ...this.state.formData, ...data } });
+
+    if (event.target.name == 'body_type'){
+      this.setState({bodyType: event.target.value})
+    }
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const form = new FormData()
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
@@ -34,6 +43,7 @@ class BodyForm extends React.Component {
     })
     .then((response) => {
       console.log(response);
+      this.props.handleItemsList(response.data)
     }, (error) => {
       console.log(error);
     });
@@ -136,7 +146,8 @@ class BodyForm extends React.Component {
 }
 
 BodyForm.propTypes = {
-  apiId: PropTypes.number
+  apiId: PropTypes.number,
+  handleItemsList: PropTypes.func,
 }
 
 export default BodyForm

@@ -10,7 +10,8 @@ class HeadersController < ApplicationController
       description: params[:description]
     )
     if header.save
-      render json: header
+      api = Api.find params[:api_id]
+      render json: api.headers
     else
 
     end

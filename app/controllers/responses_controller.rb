@@ -11,7 +11,8 @@ class ResponsesController < ApplicationController
       description: params[:description]
     )
     if response.save
-      render json: response
+      api = Api.find params[:api_id]
+      render json: api.responses
     else
 
     end
