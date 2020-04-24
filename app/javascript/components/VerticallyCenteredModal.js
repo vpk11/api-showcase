@@ -21,10 +21,10 @@ class VerticallyCenteredModal extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' />}
-          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' />}
-          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} />}
-          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} />}
+          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' handleItemsList={this.props.handleItemsList} />}
+          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' handleItemsList={this.props.handleItemsList} />}
+          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} />}
+          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} />}
         </Modal.Body>
       </Modal>
     );
@@ -36,7 +36,8 @@ VerticallyCenteredModal.propTypes = {
   show: PropTypes.bool,
   onHide: PropTypes.func,
   buttonID: PropTypes.string,
-  apiId: PropTypes.number
+  apiId: PropTypes.number,
+  handleItemsList: PropTypes.func,
 }
 
 export default VerticallyCenteredModal

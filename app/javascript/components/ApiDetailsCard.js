@@ -9,25 +9,62 @@ class ApiDetailsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false
+      modalShow: false,
+      itemsList: props.itemsList,
+      addButtonStyle: {
+        marginTop: '32px',
+        textAlign: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'block',
+      },
     }
   }
 
+  componentDidMount(){
+    this.state.itemsList.forEach((item) => {
+      if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL'){
+        this.setState({ addButtonStyle: {...this.state.addButtonStyle, ...{display: 'none'}} })
+      }
+    });
+  }
+
+  getItemName = (item, props) => {
+    var itemName = ''
+    switch (props.buttonID) {
+      case 'addParams':
+        itemName = item.key
+        break;
+      case 'addHeaders':
+        itemName = item.key
+        break;
+      case 'addBody':
+        if (item.body_type == 'none') {
+          itemName = 'none'
+        } else if (item.body_type == 'form-data' || item.body_type == 'x-www-form-urlencoded') {
+          itemName = item.key
+        } else if (item.body_type == 'raw') {
+          itemName = 'Data'
+        } else if (item.body_type == 'GraphQL') {
+          itemName = 'GraphQL Query'
+        }
+        break;
+      case 'addResponse':
+        itemName = item.code + ' ' + item.status
+        break;
+    }
+    return itemName
+  }
+
+
   render() {
-    const addButtonStyle = {
-      marginTop: '32px',
-      textAlign: 'center',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      display: 'block',
-    };
 
     const listItemStyle = {
       fontSize: 'small'
     }
 
-    const itemsList = this.props.itemsList.map((item) => <ShowCaseListItem style={listItemStyle} itemId={item.id} itemName={item.key}
-      key={item.id} />);
+    const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem style={listItemStyle} itemId={item.id} 
+                        itemName={this.getItemName(item, this.props)} key={item.id} />);
 
     return (
       <>
@@ -37,7 +74,7 @@ class ApiDetailsCard extends React.Component {
             <ListGroup>
               {itemsList}
             </ListGroup>
-            <Button style={addButtonStyle} variant="primary" size="sm" onClick={() => this.setState({ modalShow: true })}>{this.props.addButtonText}</Button>
+            <Button style={this.state.addButtonStyle} variant="primary" size="sm" onClick={() => this.setState({ modalShow: true })}>{this.props.addButtonText}</Button>
           </Card.Body>
         </Card>
         <VerticallyCenteredModal
@@ -46,6 +83,11 @@ class ApiDetailsCard extends React.Component {
           onHide={() => this.setState({ modalShow: false })}
           buttonID={this.props.buttonID}
           apiId={this.props.apiId}
+          handleItemsList={ (itemsList) => {
+              this.setState({ itemsList: itemsList})
+              this.setState({ modalShow: false })
+            }
+          }
         />
       </>
     );

@@ -10,7 +10,8 @@ class ParamsController < ApplicationController
       description: params[:description]
     )
     if param.save
-      render json: param
+      api = Api.find params[:api_id]
+      render json: api.params
     else
 
     end

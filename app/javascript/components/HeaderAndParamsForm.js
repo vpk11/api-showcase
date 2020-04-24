@@ -35,7 +35,8 @@ class HeaderAndParamsForm extends React.Component {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
+      this.props.handleItemsList(response.data)
     }, (error) => {
       console.log(error);
     });
@@ -82,6 +83,7 @@ class HeaderAndParamsForm extends React.Component {
 HeaderAndParamsForm.propTypes = {
   apiId: PropTypes.number,
   formFor: PropTypes.string,
+  handleItemsList: PropTypes.func,
 }
 
 export default HeaderAndParamsForm
