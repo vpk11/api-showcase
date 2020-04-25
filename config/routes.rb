@@ -5,4 +5,9 @@ Rails.application.routes.draw do
 
   resources :versions
   resources :projects
+  resources :apis
+  resources :headers
+  resources :params
+  resources :bodies
+  resources :responses
 end

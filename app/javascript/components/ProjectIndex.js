@@ -6,13 +6,13 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import VersionsList from './VersionsList'
+import ShowCaseListItem from './ShowCaseListItem'
 class ProjectIndex extends React.Component {
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
     };
-    const apisList = this.props.versions.map((version) => <VersionsList versionId={version.id} versionName={version.name}
+    const apisList = this.props.versions.map((version) => <ShowCaseListItem itemId={version.id} itemName={version.name}
       key={version.id} />);
     return (
       <Container style={containerMarginStyle}>
