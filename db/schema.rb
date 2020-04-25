@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_22_151740) do
     t.string "method"
     t.string "end_point"
     t.boolean "archived"
+    t.text "description"
     t.integer "version_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -34,7 +35,9 @@ ActiveRecord::Schema.define(version: 2020_03_22_151740) do
   create_table "bodies", force: :cascade do |t|
     t.string "body_type"
     t.string "key"
+    t.text "value_object"
     t.text "data"
+    t.string "data_type"
     t.text "graphql_query"
     t.text "graphql_variable"
     t.text "description"

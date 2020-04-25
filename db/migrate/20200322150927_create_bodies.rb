@@ -6,7 +6,9 @@ class CreateBodies < ActiveRecord::Migration[6.0]
     create_table :bodies do |t|
       t.string :body_type
       t.string :key
+      t.text :value_object
       t.text :data
+      t.string :data_type
       t.text :graphql_query
       t.text :graphql_variable
       t.text :description
