@@ -60,11 +60,12 @@ class ApiDetailsCard extends React.Component {
   render() {
 
     const listItemStyle = {
-      fontSize: 'small'
+      fontSize: 'small',
+      cursor: 'pointer',
     }
 
-    const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem style={listItemStyle} itemId={item.id} 
-                        itemName={this.getItemName(item, this.props)} key={item.id} />);
+    const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem key={item.id}  style={listItemStyle} itemId={item.id} 
+                        itemName={this.getItemName(item, this.props)} item={item} />);
 
     return (
       <>
@@ -86,6 +87,11 @@ class ApiDetailsCard extends React.Component {
           handleItemsList={ (itemsList) => {
               this.setState({ itemsList: itemsList})
               this.setState({ modalShow: false })
+              this.state.itemsList.forEach((item) => {
+                if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
+                  this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
+                }
+              });
             }
           }
         />
