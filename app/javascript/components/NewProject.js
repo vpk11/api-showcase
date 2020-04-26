@@ -36,7 +36,7 @@ class NewProject extends React.Component {
                 />
               </Form.Group>
               <input type="hidden" name="user_id" value={this.props.userId} />
-              <input type="hidden" name="account_id" value={this.props.account_id} />
+              <input type="hidden" name="account_id" value={this.props.accountId} />
               <CsrfInput />
               <Button variant="dark" type="submit">
                 Create Project
