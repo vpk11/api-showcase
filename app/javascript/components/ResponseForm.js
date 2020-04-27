@@ -59,6 +59,7 @@ class ResponseForm extends React.Component {
           placeholder='Eg: 200 | 404 | 500 . . .'
           name='code'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.code}
         />
         <FormTextField
           controlId='Status'
@@ -66,6 +67,7 @@ class ResponseForm extends React.Component {
           placeholder='Eg: Success | Error | Forbidden . . .'
           name='status'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.status}
         />
         <FormTextArea
           controlId='DataField'
@@ -73,6 +75,7 @@ class ResponseForm extends React.Component {
           rows={4}
           name='data'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.data}
         />
         <FormTextArea
           controlId='DescriptionField'
@@ -80,6 +83,7 @@ class ResponseForm extends React.Component {
           rows={2}
           name='description'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.description}
         />
         <Button variant="dark" style={saveButtonStyle} type="submit" >Save</Button>
       </Form>
@@ -90,6 +94,7 @@ class ResponseForm extends React.Component {
 ResponseForm.propTypes = {
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
+  item: PropTypes.object,
 }
 
 export default ResponseForm

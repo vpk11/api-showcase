@@ -59,6 +59,7 @@ class HeaderAndParamsForm extends React.Component {
           placeholder='Key'
           name='key'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.key}
         />
         <FormTextField
           controlId='ValueObject'
@@ -66,6 +67,7 @@ class HeaderAndParamsForm extends React.Component {
           placeholder='String|Integer|Boolean . . .'
           name='value_object'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.value_object}
         />
         <FormTextArea
           controlId='DescriptionField'
@@ -73,6 +75,7 @@ class HeaderAndParamsForm extends React.Component {
           rows={2}
           name='description'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.value_object}
         />
         <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
       </Form>
@@ -84,6 +87,7 @@ HeaderAndParamsForm.propTypes = {
   apiId: PropTypes.number,
   formFor: PropTypes.string,
   handleItemsList: PropTypes.func,
+  item: PropTypes.object,
 }
 
 export default HeaderAndParamsForm

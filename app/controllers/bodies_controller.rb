@@ -11,4 +11,25 @@ class BodiesController < ApplicationController
 
     end
   end
+
+  def update
+    body = Body.find(params[:id])
+    if body.present?
+      if body.update_rec(params)
+        render json: body.api.bodies
+      else
+        render json: {
+          status: 'error',
+          code: 600,
+          message: 'Record update failed'
+        }
+      end
+    else
+      render json: {
+        status: 'error',
+        code: 404,
+        message: 'Body not found'
+      }
+    end
+  end
 end
