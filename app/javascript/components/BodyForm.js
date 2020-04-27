@@ -22,6 +22,26 @@ class BodyForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.item) {
+      const item = this.props.item
+      this.setState({
+        formData: {
+          ...this.state.formData, ...{
+            body_type: item.body_type,
+            key: item.key,
+            value_object: item.value_object,
+            data_type: item.data_type,
+            data: item.data,
+            graphql_query: item.graphql_query,
+            graphql_variables: item.graphql_variables,
+            description: item.description,
+          }
+        }
+      })
+    }
+  }
+
   handleChange(event) {
     const data = {};
     data[event.target.name] = event.target.value;
@@ -38,8 +58,6 @@ class BodyForm extends React.Component {
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    console.log('From Body Form')
-    console.log(this.props.item)
     if (this.props.item) {
       const id = this.props.item.id
       axios.patch(`/bodies/${id}`, form, {

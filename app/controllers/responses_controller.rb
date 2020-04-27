@@ -17,7 +17,7 @@ class ResponsesController < ApplicationController
   end
 
   def update
-    response = Header.find(params[:id])
+    response = Response.find(params[:id])
     if response.present?
       if response.update_attributes(
         data: params[:data],

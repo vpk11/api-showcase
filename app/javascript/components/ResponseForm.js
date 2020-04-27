@@ -19,6 +19,22 @@ class ResponseForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.item) {
+      const item = this.props.item
+      this.setState({
+        formData: {
+          ...this.state.formData, ...{
+            code: item.code,
+            status: item.status,
+            data: item.data,
+            description: item.description,
+          }
+        }
+      })
+    }
+  }
+
   handleChange(event) {
     const data = {};
     data[event.target.name] = event.target.value;
@@ -31,18 +47,32 @@ class ResponseForm extends React.Component {
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    axios.post('/responses', form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    .then((response) => {
-      console.log(response);
-      this.props.handleItemsList(response.data)
-    }, (error) => {
-      console.log(error);
-    });
+    if (this.props.item) {
+      const id = this.props.item.id
+      axios.patch(`/responses/${id}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
+    else {
+      axios.post('/responses', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
   }
 
-  render () {
+  render() {
     const saveButtonStyle = {
       marginTop: '32px',
       textAlign: 'center',
