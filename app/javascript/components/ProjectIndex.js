@@ -22,6 +22,7 @@ class ProjectIndex extends React.Component {
               <Card>
                 <Accordion.Toggle as={Card.Header} eventKey="0">
                   {this.props.projectName}
+                  
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
