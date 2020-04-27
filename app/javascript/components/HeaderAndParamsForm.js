@@ -54,18 +54,40 @@ class HeaderAndParamsForm extends React.Component {
         .then((response) => {
           console.log(response.data);
           this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Updated"
+          }
+          this.props.showAlert(alert)
         }, (error) => {
           console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Updating"
+          }
+          this.props.showAlert(alert)
         });
     } else {
       axios.post(`/${this.props.formFor}`, form, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
         .then((response) => {
-          console.log(response.data);
           this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Created"
+          }
+          this.props.showAlert(alert)
         }, (error) => {
-          console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Creating"
+          }
+          this.props.showAlert(alert)
         });
     }
   }
@@ -116,6 +138,7 @@ HeaderAndParamsForm.propTypes = {
   formFor: PropTypes.string,
   handleItemsList: PropTypes.func,
   item: PropTypes.object,
+  showAlert: PropTypes.func,
 }
 
 export default HeaderAndParamsForm

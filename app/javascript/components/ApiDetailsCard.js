@@ -108,6 +108,7 @@ class ApiDetailsCard extends React.Component {
               });
             }
             }
+            showAlert={this.props.showAlert}
           />
         }
       </>
@@ -121,6 +122,7 @@ ApiDetailsCard.propTypes = {
   itemsList: PropTypes.array,
   buttonID: PropTypes.string.isRequired,
   apiId: PropTypes.number,
+  showAlert: PropTypes.func,
 }
 
 export default ApiDetailsCard

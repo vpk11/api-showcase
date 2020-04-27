@@ -21,10 +21,10 @@ class VerticallyCenteredModal extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' handleItemsList={this.props.handleItemsList} item={this.props.item} />}
-          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' handleItemsList={this.props.handleItemsList} item={this.props.item} />}
-          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} />}
-          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} />}
+          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
           
         </Modal.Body>
       </Modal>
@@ -39,6 +39,7 @@ VerticallyCenteredModal.propTypes = {
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
   item: PropTypes.object,
+  showAlert: PropTypes.func,
 }
 
 export default VerticallyCenteredModal
