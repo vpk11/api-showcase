@@ -9,7 +9,7 @@ class HeaderAndParamsForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formData: { 
+      formData: {
         api_id: this.props.apiId,
         form_for: this.props.formFor,
         authenticity_token: $('meta[name="csrf-token"]').attr('content')
@@ -17,6 +17,21 @@ class HeaderAndParamsForm extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.item) {
+      const item = this.props.item
+      this.setState({
+        formData: {
+          ...this.state.formData, ...{
+            key: item.key,
+            value_object: item.value_object,
+            description: item.description,
+          }
+        }
+      })
+    }
   }
 
   handleChange(event) {
@@ -31,18 +46,31 @@ class HeaderAndParamsForm extends React.Component {
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    axios.post(`/${this.props.formFor}`, form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    .then((response) => {
-      console.log(response.data);
-      this.props.handleItemsList(response.data)
-    }, (error) => {
-      console.log(error);
-    });
+    if (this.props.item) {
+      const id = this.props.item.id
+      axios.patch(`/${this.props.formFor}/${id}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    } else {
+      axios.post(`/${this.props.formFor}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
   }
 
-  render () {
+  render() {
     const saveButtonStyle = {
       marginTop: '32px',
       textAlign: 'center',
@@ -75,7 +103,7 @@ class HeaderAndParamsForm extends React.Component {
           rows={2}
           name='description'
           onChange={this.handleChange}
-          defaultValue={this.props.item && this.props.item.value_object}
+          defaultValue={this.props.item && this.props.item.description}
         />
         <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
       </Form>
