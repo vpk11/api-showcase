@@ -2,6 +2,11 @@
 
 # Controller For Versions
 class VersionsController < ApplicationController
+  def index
+    @project = Project.first
+    @version = @project.version
+  end
+
   def new
     @project = Project.first
   end
@@ -20,6 +25,12 @@ class VersionsController < ApplicationController
   end
 
   def show
+    @version = Version.first
+    @apis = @version.apis
+    #@params = @apis.includes(:params) { |api| api.params }
+    #@headers = @apis.includes(:headers) { |api| api.headers }
+    #@bodies = @apis.includes(:bodies) { |api| api.bodies }
+    #@responses = @apis.includes(:responses) { |api| api.responses }
   end
 
   def edit
