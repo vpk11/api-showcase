@@ -16,7 +16,7 @@ class BodyForm extends React.Component {
         body_type: 'none',
         data_type: 'Text',
       },
-      bodyType: '',
+      bodyType: props.item && props.item.body_type,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,8 +27,8 @@ class BodyForm extends React.Component {
     data[event.target.name] = event.target.value;
     this.setState({ formData: { ...this.state.formData, ...data } });
 
-    if (event.target.name == 'body_type'){
-      this.setState({bodyType: event.target.value})
+    if (event.target.name == 'body_type') {
+      this.setState({ bodyType: event.target.value })
     }
   }
 
@@ -38,15 +38,30 @@ class BodyForm extends React.Component {
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    axios.post('/bodies', form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    .then((response) => {
-      console.log(response);
-      this.props.handleItemsList(response.data)
-    }, (error) => {
-      console.log(error);
-    });
+    console.log('From Body Form')
+    console.log(this.props.item)
+    if (this.props.item) {
+      const id = this.props.item.id
+      axios.patch(`/bodies/${id}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    } else {
+      axios.post('/bodies', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
   }
 
   render() {
@@ -58,7 +73,7 @@ class BodyForm extends React.Component {
       display: 'block',
     };
     const BODY_TYPE = ['none', 'form-data', 'x-www-form-urlencoded', 'raw', 'GraphQL']
-    const DATA_TYPE = ['Text', 'JavaScript', 'JSON', 'HTML','XML']
+    const DATA_TYPE = ['Text', 'JavaScript', 'JSON', 'HTML', 'XML']
 
     return (
       <Form onSubmit={this.handleSubmit} >
@@ -68,26 +83,29 @@ class BodyForm extends React.Component {
           options={BODY_TYPE}
           name='body_type'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.body_type}
         />
-        { 
-          (this.state.bodyType == 'form-data' || this.state.bodyType == 'x-www-form-urlencoded') &&
-            <FormTextField
-              controlId='KeyField'
-              label='Key' type='text'
-              placeholder='Key'
-              name='key'
-              onChange={this.handleChange}
-            />
-        } 
         {
           (this.state.bodyType == 'form-data' || this.state.bodyType == 'x-www-form-urlencoded') &&
-            <FormTextField
-              controlId='ValueObject'
-              label='Type' type='text'
-              placeholder='String|Integer|Boolean . . .'
-              name='value_object'
-              onChange={this.handleChange}
-            />
+          <FormTextField
+            controlId='KeyField'
+            label='Key' type='text'
+            placeholder='Key'
+            name='key'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.key}
+          />
+        }
+        {
+          (this.state.bodyType == 'form-data' || this.state.bodyType == 'x-www-form-urlencoded') &&
+          <FormTextField
+            controlId='ValueObject'
+            label='Type' type='text'
+            placeholder='String|Integer|Boolean . . .'
+            name='value_object'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.value_object}
+          />
         }
         {
           (this.state.bodyType == 'raw') &&
@@ -97,47 +115,52 @@ class BodyForm extends React.Component {
             options={DATA_TYPE}
             name='data_type'
             onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.data_type}
           />
         }
         {
           (this.state.bodyType == 'raw') &&
-            <FormTextArea
-              controlId='DataField'
-              label='Data' type='textarea'
-              rows={3}
-              name='data'
-              onChange={this.handleChange}
-            />
+          <FormTextArea
+            controlId='DataField'
+            label='Data' type='textarea'
+            rows={3}
+            name='data'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.data}
+          />
         }
         {
           this.state.bodyType == 'GraphQL' &&
-            <FormTextArea
-              controlId='GraphQLQueryField'
-              label='GraphQL Query' type='textarea'
-              rows={3}
-              name='graphql_query'
-              onChange={this.handleChange}
-            />
+          <FormTextArea
+            controlId='GraphQLQueryField'
+            label='GraphQL Query' type='textarea'
+            rows={3}
+            name='graphql_query'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.graphql_query}
+          />
         }
         {
           this.state.bodyType == 'GraphQL' &&
-            <FormTextArea
-              controlId='GraphQLVariablesField'
-              label='GraphQL Variables' type='textarea'
-              rows={2}
-              name='graphql_variables'
-              onChange={this.handleChange}
-            />
+          <FormTextArea
+            controlId='GraphQLVariablesField'
+            label='GraphQL Variables' type='textarea'
+            rows={2}
+            name='graphql_variables'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.graphql_variables}
+          />
         }
         {
           (this.state.bodyType == 'form-data' || this.state.bodyType == 'x-www-form-urlencoded' || this.state.bodyType == 'GraphQL' || this.state.bodyType == 'raw') &&
-            <FormTextArea
-              controlId='DescriptionField'
-              label='Description' type='textarea'
-              rows={2}
-              name='description'
-              onChange={this.handleChange}
-            />
+          <FormTextArea
+            controlId='DescriptionField'
+            label='Description' type='textarea'
+            rows={2}
+            name='description'
+            onChange={this.handleChange}
+            defaultValue={this.props.item && this.props.item.description}
+          />
         }
         <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
       </Form>
@@ -148,6 +171,7 @@ class BodyForm extends React.Component {
 BodyForm.propTypes = {
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
+  item: PropTypes.object,
 }
 
 export default BodyForm
