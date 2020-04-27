@@ -66,8 +66,20 @@ class BodyForm extends React.Component {
         .then((response) => {
           console.log(response);
           this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Updated"
+          }
+          this.props.showAlert(alert)
         }, (error) => {
           console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Updating"
+          }
+          this.props.showAlert(alert)
         });
     } else {
       axios.post('/bodies', form, {
@@ -76,8 +88,20 @@ class BodyForm extends React.Component {
         .then((response) => {
           console.log(response);
           this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Created"
+          }
+          this.props.showAlert(alert)
         }, (error) => {
           console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Creating"
+          }
+          this.props.showAlert(alert)
         });
     }
   }
@@ -190,6 +214,7 @@ BodyForm.propTypes = {
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
   item: PropTypes.object,
+  showAlert: PropTypes.func,
 }
 
 export default BodyForm

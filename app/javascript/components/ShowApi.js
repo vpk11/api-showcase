@@ -11,8 +11,26 @@ class ShowApi extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAlert: props.showAlert
+      alert: {
+        alertType: 'success',
+        showAlert: props.showAlert,
+        alertMessage: props.alertMessage
+      }
     }
+    this.onCloseAlert = this.onCloseAlert.bind(this);
+    this.setAlert = this.setAlert.bind(this);
+  }
+
+  onCloseAlert() {
+    this.setState({
+      alert: {
+        ...this.state.alert, ...{ showAlert: false }
+      }
+    })
+  }
+
+  setAlert(alert) {
+    this.setState({ alert: alert })
   }
 
   render() {
@@ -27,7 +45,7 @@ class ShowApi extends React.Component {
       <Container style={containerMarginStyle}>
         <Row>
           <Col>
-            <DismissibleAlert show={this.state.showAlert} type='success' alertHeading={this.props.alertMessage} />
+            {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={this.state.alert.alertMessage} onClose={this.onCloseAlert} />}
             <Card>
               <Card.Header as="h5">API Details</Card.Header>
               <Card.Body>
@@ -45,13 +63,13 @@ class ShowApi extends React.Component {
                 </div>
 
                 <CardDeck>
-                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} apiId={this.props.api.id} />
+                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} apiId={this.props.api.id} />
+                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} apiId={this.props.api.id} />
+                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} apiId={this.props.api.id} />
+                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} apiId={this.props.api.id} showAlert={this.setAlert} />
                 </CardDeck>
               </Card.Body>
             </Card>
