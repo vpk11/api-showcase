@@ -2,11 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import Form from 'react-bootstrap/Form'
 class FormTextField extends React.Component {
-  render () {
+  render() {
     return (
       <Form.Group controlId={this.props.controlId}>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control onChange={this.props.onChange} type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} defaultValue={this.props.defaultValue} />
+        {this.props.required ?
+          <Form.Control onChange={this.props.onChange} type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} defaultValue={this.props.defaultValue} required /> :
+          <Form.Control onChange={this.props.onChange} type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} defaultValue={this.props.defaultValue} />
+        }
       </Form.Group>
     );
   }
@@ -19,7 +22,8 @@ FormTextField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   defaultValue: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  required: PropTypes.bool,
 }
 
 export default FormTextField

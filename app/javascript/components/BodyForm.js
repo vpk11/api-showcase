@@ -136,6 +136,7 @@ class BodyForm extends React.Component {
             name='key'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.key}
+            required={true}
           />
         }
         {
@@ -147,6 +148,7 @@ class BodyForm extends React.Component {
             name='value_object'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.value_object}
+            required={true}
           />
         }
         {
@@ -169,6 +171,7 @@ class BodyForm extends React.Component {
             name='data'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.data}
+            required={true}
           />
         }
         {
@@ -180,6 +183,7 @@ class BodyForm extends React.Component {
             name='graphql_query'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.graphql_query}
+            required={true}
           />
         }
         {
@@ -191,6 +195,7 @@ class BodyForm extends React.Component {
             name='graphql_variables'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.graphql_variables}
+            required={true}
           />
         }
         {
@@ -202,6 +207,7 @@ class BodyForm extends React.Component {
             name='description'
             onChange={this.handleChange}
             defaultValue={this.props.item && this.props.item.description}
+            required={true}
           />
         }
         <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>

@@ -110,6 +110,7 @@ class HeaderAndParamsForm extends React.Component {
           name='key'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.key}
+          required={true}
         />
         <FormTextField
           controlId='ValueObject'
@@ -118,6 +119,7 @@ class HeaderAndParamsForm extends React.Component {
           name='value_object'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.value_object}
+          required={true}
         />
         <FormTextArea
           controlId='DescriptionField'
@@ -126,6 +128,7 @@ class HeaderAndParamsForm extends React.Component {
           name='description'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.description}
+          required={true}
         />
         <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
       </Form>

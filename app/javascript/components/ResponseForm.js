@@ -114,6 +114,7 @@ class ResponseForm extends React.Component {
           name='code'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.code}
+          required={true}
         />
         <FormTextField
           controlId='Status'
@@ -122,6 +123,7 @@ class ResponseForm extends React.Component {
           name='status'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.status}
+          required={true}
         />
         <FormTextArea
           controlId='DataField'
@@ -130,6 +132,7 @@ class ResponseForm extends React.Component {
           name='data'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.data}
+          required={true}
         />
         <FormTextArea
           controlId='DescriptionField'
@@ -138,6 +141,7 @@ class ResponseForm extends React.Component {
           name='description'
           onChange={this.handleChange}
           defaultValue={this.props.item && this.props.item.description}
+          required={true}
         />
         <Button variant="dark" style={saveButtonStyle} type="submit" >Save</Button>
       </Form>
