@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: api_showcase_new_development
+  database: api_development
   host: localhost
 
   # The specified database role being used to connect to postgres.
@@ -58,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: api_showcase_new_test
+  database: api_showcase_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,5 +81,5 @@ test:
 #
 production:
   <<: *default
-  database: api_showcase_new_production
+  database: api_production
   host: localhost
