@@ -14,9 +14,28 @@ class ResponseForm extends React.Component {
         api_id: this.props.apiId,
         authenticity_token: $('meta[name="csrf-token"]').attr('content'),
       },
+      showDeleteButton: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteRecord = this.deleteRecord.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.item) {
+      const item = this.props.item
+      this.setState({
+        formData: {
+          ...this.state.formData, ...{
+            code: item.code,
+            status: item.status,
+            data: item.data,
+            description: item.description,
+          }
+        },
+        showDeleteButton: true,
+      })
+    }
   }
 
   handleChange(event) {
@@ -31,18 +50,80 @@ class ResponseForm extends React.Component {
     for (let [key, value] of Object.entries(this.state.formData)) {
       form.set(key, value)
     }
-    axios.post('/responses', form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    .then((response) => {
-      console.log(response);
-      this.props.handleItemsList(response.data)
-    }, (error) => {
-      console.log(error);
-    });
+    if (this.props.item) {
+      const id = this.props.item.id
+      axios.patch(`/responses/${id}`, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Updated"
+          }
+          this.props.showAlert(alert)
+        }, (error) => {
+          console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Updating"
+          }
+          this.props.showAlert(alert)
+        });
+    }
+    else {
+      axios.post('/responses', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((response) => {
+          console.log(response);
+          this.props.handleItemsList(response.data)
+          const alert = {
+            alertType: 'success',
+            showAlert: true,
+            alertMessage: "Successfully Created"
+          }
+          this.props.showAlert(alert)
+        }, (error) => {
+          console.log(error);
+          const alert = {
+            alertType: 'error',
+            showAlert: true,
+            alertMessage: "Error Creating"
+          }
+          this.props.showAlert(alert)
+        });
+    }
   }
 
-  render () {
+  deleteRecord(event) {
+    event.preventDefault();
+    const id = this.props.item.id
+    axios.delete(`/responses/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        this.props.handleItemsList(response.data)
+        const alert = {
+          alertType: 'success',
+          showAlert: true,
+          alertMessage: "Successfully Deleted"
+        }
+        this.props.showAlert(alert)
+      }, (error) => {
+        console.log(error);
+        const alert = {
+          alertType: 'error',
+          showAlert: true,
+          alertMessage: "Error Deleting"
+        }
+        this.props.showAlert(alert)
+      });
+  }
+
+  render() {
     const saveButtonStyle = {
       marginTop: '32px',
       textAlign: 'center',
@@ -50,6 +131,10 @@ class ResponseForm extends React.Component {
       marginRight: 'auto',
       display: 'block',
     };
+
+    const deleteBtnStyle = {
+      marginLeft: '32px',
+    }
 
     return (
       <Form onSubmit={this.handleSubmit} >
@@ -59,6 +144,8 @@ class ResponseForm extends React.Component {
           placeholder='Eg: 200 | 404 | 500 . . .'
           name='code'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.code}
+          required={true}
         />
         <FormTextField
           controlId='Status'
@@ -66,6 +153,8 @@ class ResponseForm extends React.Component {
           placeholder='Eg: Success | Error | Forbidden . . .'
           name='status'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.status}
+          required={true}
         />
         <FormTextArea
           controlId='DataField'
@@ -73,6 +162,8 @@ class ResponseForm extends React.Component {
           rows={4}
           name='data'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.data}
+          required={true}
         />
         <FormTextArea
           controlId='DescriptionField'
@@ -80,8 +171,13 @@ class ResponseForm extends React.Component {
           rows={2}
           name='description'
           onChange={this.handleChange}
+          defaultValue={this.props.item && this.props.item.description}
+          required={true}
         />
-        <Button variant="dark" style={saveButtonStyle} type="submit" >Save</Button>
+        <div style={saveButtonStyle}>
+          <Button variant="dark" type="submit">Save</Button>
+          {this.state.showDeleteButton && <Button variant="danger" style={deleteBtnStyle} onClick={this.deleteRecord} >Delete</Button>}
+        </div>
       </Form>
     );
   }
@@ -90,6 +186,8 @@ class ResponseForm extends React.Component {
 ResponseForm.propTypes = {
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
+  item: PropTypes.object,
+  showAlert: PropTypes.func,
 }
 
 export default ResponseForm
