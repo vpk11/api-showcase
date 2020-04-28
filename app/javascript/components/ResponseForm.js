@@ -14,9 +14,11 @@ class ResponseForm extends React.Component {
         api_id: this.props.apiId,
         authenticity_token: $('meta[name="csrf-token"]').attr('content'),
       },
+      showDeleteButton: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteRecord = this.deleteRecord.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +32,8 @@ class ResponseForm extends React.Component {
             data: item.data,
             description: item.description,
           }
-        }
+        },
+        showDeleteButton: true,
       })
     }
   }
@@ -96,6 +99,30 @@ class ResponseForm extends React.Component {
     }
   }
 
+  deleteRecord(event) {
+    event.preventDefault();
+    const id = this.props.item.id
+    axios.delete(`/responses/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        this.props.handleItemsList(response.data)
+        const alert = {
+          alertType: 'success',
+          showAlert: true,
+          alertMessage: "Successfully Deleted"
+        }
+        this.props.showAlert(alert)
+      }, (error) => {
+        console.log(error);
+        const alert = {
+          alertType: 'error',
+          showAlert: true,
+          alertMessage: "Error Deleting"
+        }
+        this.props.showAlert(alert)
+      });
+  }
+
   render() {
     const saveButtonStyle = {
       marginTop: '32px',
@@ -104,6 +131,10 @@ class ResponseForm extends React.Component {
       marginRight: 'auto',
       display: 'block',
     };
+
+    const deleteBtnStyle = {
+      marginLeft: '32px',
+    }
 
     return (
       <Form onSubmit={this.handleSubmit} >
@@ -143,7 +174,10 @@ class ResponseForm extends React.Component {
           defaultValue={this.props.item && this.props.item.description}
           required={true}
         />
-        <Button variant="dark" style={saveButtonStyle} type="submit" >Save</Button>
+        <div style={saveButtonStyle}>
+          <Button variant="dark" type="submit">Save</Button>
+          {this.state.showDeleteButton && <Button variant="danger" style={deleteBtnStyle} onClick={this.deleteRecord} >Delete</Button>}
+        </div>
       </Form>
     );
   }
