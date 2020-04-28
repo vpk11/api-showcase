@@ -37,44 +37,51 @@ class ShowApi extends React.Component {
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
+      marginBottom: '32px',
     };
     const eachDetailsCard = {
       marginBottom: '32px',
     };
 
     return (
-      <Container style={containerMarginStyle}>
+      <Container fluid>
         <Row>
           <Col>
             <ShowcaseNav username={'kuttu'} />
-            {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={`🦄 ${this.state.alert.alertMessage}`} onClose={this.onCloseAlert} />}
-            <Card>
-              <Card.Header as="h5">API Details</Card.Header>
-              <Card.Body>
-                <div style={eachDetailsCard}>
-                  <h6>Method</h6>
-                  <div>{this.props.api.method}</div>
-                </div>
-                <div style={eachDetailsCard}>
-                  <h6>Endpoint</h6>
-                  <div>{this.props.api.end_point}</div>
-                </div>
-                <div style={eachDetailsCard}>
-                  <h6>Description</h6>
-                  <div>{this.props.api.description}</div>
-                </div>
+            <Container style={containerMarginStyle}>
+              <Row>
+                <Col>
+                  {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={`🦄 ${this.state.alert.alertMessage}`} onClose={this.onCloseAlert} />}
+                  <Card>
+                    <Card.Header as="h5">API Details</Card.Header>
+                    <Card.Body>
+                      <div style={eachDetailsCard}>
+                        <h6>Method</h6>
+                        <div>{this.props.api.method}</div>
+                      </div>
+                      <div style={eachDetailsCard}>
+                        <h6>Endpoint</h6>
+                        <div>{this.props.api.end_point}</div>
+                      </div>
+                      <div style={eachDetailsCard}>
+                        <h6>Description</h6>
+                        <div>{this.props.api.description}</div>
+                      </div>
 
-                <CardDeck>
-                  <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} apiId={this.props.api.id} showAlert={this.setAlert} />
+                      <CardDeck>
+                        <ApiDetailsCard buttonID='addParams' cardTitle='Params' addButtonText='Add Params' itemsList={this.props.params} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} apiId={this.props.api.id} showAlert={this.setAlert} />
+                        <ApiDetailsCard buttonID='addHeaders' cardTitle='Headers' addButtonText='Add Headers' itemsList={this.props.headers} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} apiId={this.props.api.id} showAlert={this.setAlert} />
+                        <ApiDetailsCard buttonID='addBody' cardTitle='Body' addButtonText='Add Body' itemsList={this.props.bodies} apiId={this.props.api.id} showAlert={this.setAlert} />
 
-                  <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} apiId={this.props.api.id} showAlert={this.setAlert} />
-                </CardDeck>
-              </Card.Body>
-            </Card>
+                        <ApiDetailsCard buttonID='addResponse' cardTitle='Response' addButtonText='Add Response' itemsList={this.props.responses} apiId={this.props.api.id} showAlert={this.setAlert} />
+                      </CardDeck>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>

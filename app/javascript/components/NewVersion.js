@@ -16,6 +16,7 @@ class NewVersion extends React.Component {
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
+      marginBottom: '32px',
     };
     const projectNameStyle = {
       paddingLeft: '12px',
