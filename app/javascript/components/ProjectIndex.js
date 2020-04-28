@@ -6,16 +6,21 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import ShowCaseListItem from './ShowCaseListItem'
+import ShowVersionListItem from './ShowVersionListItem'
 
 class ProjectIndex extends React.Component {
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
     };
-    const apisList = this.props.versions.map((version) => <ShowCaseListItem itemId={version.id} itemName={version.name}
+    const versionsList = this.props.versions.map((version) => <ShowVersionListItem itemId={version.id} itemName={version.name}
       key={version.id} />);
-    const versionId = this.props.versions.map((version) => version.id)
+      const versionId = this.props.versions.map((version) => version.id);
+      this.state ={
+        versionsList,
+        versionId
+      };
+
     return (
       <Container style={containerMarginStyle}>
         <Row>
@@ -28,9 +33,9 @@ class ProjectIndex extends React.Component {
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    <ListGroup>
-                      <a href={"http://localhost:3000/versions/" +versionId}> {apisList }</a>
-                    </ListGroup> 
+                        <ListGroup>
+                          {versionsList}
+                        </ListGroup>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
