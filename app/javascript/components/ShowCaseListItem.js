@@ -4,7 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 class ShowCaseListItem extends React.Component {
   render () {
     return (
-      <ListGroup.Item style={this.props.style} onClick={() => console.log('clicked')} >
+      <ListGroup.Item style={this.props.style} onClick={this.props.onClick(this.props.item)} >
         {this.props.itemName}
       </ListGroup.Item>
     );
@@ -16,6 +16,7 @@ ShowCaseListItem.propTypes = {
   itemId: PropTypes.number.isRequired,
   itemName: PropTypes.string.isRequired,
   item: PropTypes.object,
+  onClick: PropTypes.func,
 }
 
 export default ShowCaseListItem
