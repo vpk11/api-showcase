@@ -4,15 +4,9 @@ import Alert from 'react-bootstrap/Alert'
 class DismissibleAlert extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      show: props.show
-    };
   }
 
   render() {
-    const alertDisplay = {
-      display: (this.state.show == 'true' ? 'block' : 'none')
-    }
 
     const alertType = {
       'primary': 'primary',
@@ -28,7 +22,7 @@ class DismissibleAlert extends React.Component {
     const type = this.props.type ? alertType[this.props.type] : alertType.primary
 
     return (
-      <Alert style={alertDisplay} variant={type} onClose={() => this.setState({ show: false })} dismissible>
+      <Alert show={true} variant={type} onClose={this.props.onClose} dismissible>
         <Alert.Heading>{this.props.alertHeading}</Alert.Heading>
         <ul>
           {this.props.alertList && this.props.alertList.map(alert => <li>{alert}</li>)}
@@ -42,6 +36,7 @@ DismissibleAlert.propTypes = {
   alertList: PropTypes.array,
   alertHeading: PropTypes.string,
   type: PropTypes.string,
+  onClose: PropTypes.func,
 }
 
 export default DismissibleAlert

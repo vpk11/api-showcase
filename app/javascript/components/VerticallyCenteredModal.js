@@ -10,7 +10,7 @@ class VerticallyCenteredModal extends React.Component {
     return (
       <Modal
         size="lg"
-        show={this.props.show}
+        show={true}
         onHide={this.props.onHide}
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -21,10 +21,10 @@ class VerticallyCenteredModal extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' handleItemsList={this.props.handleItemsList} />}
-          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' handleItemsList={this.props.handleItemsList} />}
-          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} />}
-          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} />}
+          {this.props.buttonID == 'addParams' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='params' handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addHeaders' && <HeaderAndParamsForm apiId={this.props.apiId} formFor='headers' handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addBody' && <BodyForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
+          {this.props.buttonID == 'addResponse' && <ResponseForm apiId={this.props.apiId} handleItemsList={this.props.handleItemsList} item={this.props.item} showAlert={this.props.showAlert} />}
           
         </Modal.Body>
       </Modal>
@@ -34,11 +34,12 @@ class VerticallyCenteredModal extends React.Component {
 
 VerticallyCenteredModal.propTypes = {
   modalTitle: PropTypes.string,
-  show: PropTypes.bool,
   onHide: PropTypes.func,
   buttonID: PropTypes.string,
   apiId: PropTypes.number,
   handleItemsList: PropTypes.func,
+  item: PropTypes.object,
+  showAlert: PropTypes.func,
 }
 
 export default VerticallyCenteredModal
