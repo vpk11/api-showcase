@@ -12,6 +12,7 @@ import FormTextArea from "./FormTextArea"
 import DismissibleAlert from "./DismissibleAlert"
 import CsrfInput from './CsrfInput'
 import { ALERT_HEADING } from '../utils/constants'
+import ShowcaseNav from './ShowcaseNav'
 class NewApi extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,7 @@ class NewApi extends React.Component {
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
+      marginBottom: '32px',
     };
     const saveButtonStyle = {
       marginTop: '32px',
@@ -39,42 +41,51 @@ class NewApi extends React.Component {
     };
 
     return (
-      <Container style={containerMarginStyle}>
+      <Container fluid>
         <Row>
           <Col>
-            <DismissibleAlert show={this.state.show} type='error' alertList={this.props.errors} alertHeading={ALERT_HEADING.error} />
-            <Form action="/apis" method="POST" >
-              <Card>
-                <Card.Header as="h5">Create Api Doc({this.props.versionName})</Card.Header>
-                <Card.Body>
-                  <FormSelect
-                    controlId='MethodSelect'
-                    label='Method' type='select'
-                    options={this.props.methods}
-                    name='method'
-                    value={this.props.api && this.props.api.method}
-                  />
-                  <FormTextField
-                    controlId='EndPointField'
-                    label='Endpoint' type='text'
-                    placeholder='Endpoint'
-                    name='end_point'
-                    value={this.props.api && this.props.api.end_point}
-                  />
-                  <FormTextArea
-                    controlId='DescriptionField'
-                    label='Description' type='textarea'
-                    rows={2}
-                    name='description'
-                    value={this.props.api && this.props.api.description}
-                  />
-                </Card.Body>
-              </Card>
-              <input type="hidden" name="version_id" value={this.props.versionId} />
-              <input type="hidden" name="archived" value={false} />
-              <CsrfInput />
-              <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
-            </Form>
+            <ShowcaseNav username={'kuttu'} />
+            <Container style={containerMarginStyle}>
+              <Row>
+                <Col>
+                  {this.state.show &&
+                    <DismissibleAlert type='error' alertList={this.props.errors} alertHeading={ALERT_HEADING.error} onClose={() => this.setState({ show: false })} />
+                  }
+                  <Form action="/apis" method="POST" >
+                    <Card>
+                      <Card.Header as="h5">Create Api Doc({this.props.versionName})</Card.Header>
+                      <Card.Body>
+                        <FormSelect
+                          controlId='MethodSelect'
+                          label='Method' type='select'
+                          options={this.props.methods}
+                          name='method'
+                          value={this.props.api && this.props.api.method}
+                        />
+                        <FormTextField
+                          controlId='EndPointField'
+                          label='Endpoint' type='text'
+                          placeholder='Endpoint'
+                          name='end_point'
+                          value={this.props.api && this.props.api.end_point}
+                        />
+                        <FormTextArea
+                          controlId='DescriptionField'
+                          label='Description' type='textarea'
+                          rows={2}
+                          name='description'
+                          value={this.props.api && this.props.api.description}
+                        />
+                      </Card.Body>
+                    </Card>
+                    <input type="hidden" name="version_id" value={this.props.versionId} />
+                    <input type="hidden" name="archived" value={false} />
+                    <CsrfInput />
+                    <Button variant="dark" style={saveButtonStyle} type="submit">Save</Button>
+                  </Form>
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>

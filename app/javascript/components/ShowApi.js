@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import DismissibleAlert from './DismissibleAlert'
 import ApiDetailsCard from './ApiDetailsCard'
+import ShowcaseNav from './ShowcaseNav'
 class ShowApi extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +46,7 @@ class ShowApi extends React.Component {
       <Container style={containerMarginStyle}>
         <Row>
           <Col>
+            <ShowcaseNav username={'kuttu'} />
             {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={`🦄 ${this.state.alert.alertMessage}`} onClose={this.onCloseAlert} />}
             <Card>
               <Card.Header as="h5">API Details</Card.Header>
