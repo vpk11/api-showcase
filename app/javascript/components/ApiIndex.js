@@ -16,7 +16,6 @@ class ApiIndex extends React.Component {
       const eachDetailsCard = {
         marginBottom: '32px',
       };
-
       const paramsList = this.props.parameters.map((param) => param.key);
       const headerList = this.props.headers.map((header) => header.key);
       const bodyList = this.props.bodies.map((body) => body.key);
@@ -26,7 +25,6 @@ class ApiIndex extends React.Component {
         <Container style={containerMarginStyle}>
           <Row>
             <Col>
-              
                 <Card>
                 <Accordion>
                   <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -101,7 +99,6 @@ class ApiIndex extends React.Component {
                   </Accordion.Collapse>
                   </Accordion>
                 </Card>
-             
             </Col>
           </Row>
         </Container>
