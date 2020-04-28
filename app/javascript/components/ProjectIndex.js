@@ -15,11 +15,7 @@ class ProjectIndex extends React.Component {
     };
     const versionsList = this.props.versions.map((version) => <ShowVersionListItem itemId={version.id} itemName={version.name}
       key={version.id} />);
-      const versionId = this.props.versions.map((version) => version.id);
-      this.state ={
-        versionsList,
-        versionId
-      };
+    const versionId = this.props.versions.map((version) => version.id);
 
     return (
       <Container style={containerMarginStyle}>
@@ -29,13 +25,12 @@ class ProjectIndex extends React.Component {
               <Card>
                 <Accordion.Toggle as={Card.Header} eventKey="0">
                   {this.props.projectName}
-                  
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                        <ListGroup>
-                          {versionsList}
-                        </ListGroup>
+                    <ListGroup>
+                      {versionsList}
+                    </ListGroup>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
