@@ -2,11 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import Form from 'react-bootstrap/Form'
 class FormTextArea extends React.Component {
-  render () {
+  render() {
     return (
       <Form.Group controlId={this.props.controlId}>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control onChange={this.props.onChange} as={this.props.type} rows={this.props.rows} name={this.props.name} defaultValue={this.props.defaultValue} />
+        {this.props.required ?
+          <Form.Control onChange={this.props.onChange} as={this.props.type} rows={this.props.rows} name={this.props.name} defaultValue={this.props.defaultValue} required /> :
+          <Form.Control onChange={this.props.onChange} as={this.props.type} rows={this.props.rows} name={this.props.name} defaultValue={this.props.defaultValue} />
+        }
       </Form.Group>
     );
   }
