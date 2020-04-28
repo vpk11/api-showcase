@@ -8,7 +8,7 @@ class FormSelect extends React.Component {
     return (
       <Form.Group controlId={this.props.controlId}>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control onChange={this.props.onChange} as={this.props.type} name={this.props.name} value={this.props.value}>
+        <Form.Control onChange={this.props.onChange} as={this.props.type} name={this.props.name} defaultValue={this.props.defaultValue}>
           {opts}
         </Form.Control>
       </Form.Group>
@@ -22,7 +22,7 @@ FormSelect.propTypes = {
   type: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  defaultValue: PropTypes.string,
   onChange: PropTypes.func,
 }
 

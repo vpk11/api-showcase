@@ -19,7 +19,9 @@ class ApiDetailsCard extends React.Component {
         marginRight: 'auto',
         display: 'block',
       },
+      item: null,
     }
+    this.itemOnClick = this.itemOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +59,11 @@ class ApiDetailsCard extends React.Component {
     return itemName
   }
 
+  itemOnClick = (item) => () => {
+    this.setState({ modalShow: true })
+    this.setState({ item: item })
+  }
+  
   render() {
     const listItemStyle = {
       fontSize: 'small',
@@ -64,7 +71,9 @@ class ApiDetailsCard extends React.Component {
     }
 
     const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem key={item.id} style={listItemStyle} itemId={item.id}
-      itemName={this.getItemName(item, this.props)} item={item} />);
+      itemName={this.getItemName(item, this.props)} item={item}
+      onClick={(item) => this.itemOnClick(item)}
+    />);
 
     return (
       <>
@@ -77,23 +86,30 @@ class ApiDetailsCard extends React.Component {
             <Button style={this.state.addButtonStyle} variant="primary" size="sm" onClick={() => this.setState({ modalShow: true })}>{this.props.addButtonText}</Button>
           </Card.Body>
         </Card>
-        <VerticallyCenteredModal
-          modalTitle={this.props.cardTitle}
-          show={this.state.modalShow}
-          onHide={() => this.setState({ modalShow: false })}
-          buttonID={this.props.buttonID}
-          apiId={this.props.apiId}
-          handleItemsList={(itemsList) => {
-            this.setState({ itemsList: itemsList })
-            this.setState({ modalShow: false })
-            this.state.itemsList.forEach((item) => {
-              if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
-                this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
-              }
-            });
-          }
-          }
-        />
+        {this.state.modalShow &&
+          <VerticallyCenteredModal
+            modalTitle={this.props.cardTitle}
+            onHide={() => {
+              this.setState({ modalShow: false })
+              this.setState({ item: null })
+            }}
+            buttonID={this.props.buttonID}
+            apiId={this.props.apiId}
+            item={this.state.item}
+            handleItemsList={(itemsList) => {
+              this.setState({ itemsList: itemsList })
+              this.setState({ modalShow: false })
+              this.state.itemsList.forEach((item) => {
+                if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
+                  this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
+                  this.setState({ item: null })
+                }
+              });
+            }
+            }
+            showAlert={this.props.showAlert}
+          />
+        }
       </>
     );
   }
@@ -105,6 +121,7 @@ ApiDetailsCard.propTypes = {
   itemsList: PropTypes.array,
   buttonID: PropTypes.string.isRequired,
   apiId: PropTypes.number,
+  showAlert: PropTypes.func,
 }
 
 export default ApiDetailsCard
