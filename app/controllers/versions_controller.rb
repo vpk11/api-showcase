@@ -25,7 +25,7 @@ class VersionsController < ApplicationController
   end
 
   def show
-    @version = Version.first
+    @version = Version.find(params[:id])
     @apis = @version.apis
   end
 

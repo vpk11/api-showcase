@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ShowCaseListItem from './ShowCaseListItem'
+
 class ProjectIndex extends React.Component {
   render() {
     const containerMarginStyle = {
@@ -14,6 +15,7 @@ class ProjectIndex extends React.Component {
     };
     const apisList = this.props.versions.map((version) => <ShowCaseListItem itemId={version.id} itemName={version.name}
       key={version.id} />);
+    const versionId = this.props.versions.map((version) => version.id)
     return (
       <Container style={containerMarginStyle}>
         <Row>
@@ -27,8 +29,8 @@ class ProjectIndex extends React.Component {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     <ListGroup>
-                      {apisList}
-                    </ListGroup>
+                      <a href={"http://localhost:3000/versions/" +versionId}> {apisList }</a>
+                    </ListGroup> 
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
