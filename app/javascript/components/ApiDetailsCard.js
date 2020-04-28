@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import VerticallyCenteredModal from './VerticallyCenteredModal'
+
 class ApiDetailsCard extends React.Component {
   constructor(props) {
     super(props);
@@ -21,10 +22,10 @@ class ApiDetailsCard extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.state.itemsList.forEach((item) => {
-      if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL'){
-        this.setState({ addButtonStyle: {...this.state.addButtonStyle, ...{display: 'none'}} })
+      if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
+        this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
       }
     });
   }
@@ -56,16 +57,14 @@ class ApiDetailsCard extends React.Component {
     return itemName
   }
 
-
   render() {
-
     const listItemStyle = {
       fontSize: 'small',
       cursor: 'pointer',
     }
 
-    const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem key={item.id}  style={listItemStyle} itemId={item.id} 
-                        itemName={this.getItemName(item, this.props)} item={item} />);
+    const itemsList = this.state.itemsList.map((item) => <ShowCaseListItem key={item.id} style={listItemStyle} itemId={item.id}
+      itemName={this.getItemName(item, this.props)} item={item} />);
 
     return (
       <>
@@ -84,15 +83,15 @@ class ApiDetailsCard extends React.Component {
           onHide={() => this.setState({ modalShow: false })}
           buttonID={this.props.buttonID}
           apiId={this.props.apiId}
-          handleItemsList={ (itemsList) => {
-              this.setState({ itemsList: itemsList})
-              this.setState({ modalShow: false })
-              this.state.itemsList.forEach((item) => {
-                if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
-                  this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
-                }
-              });
-            }
+          handleItemsList={(itemsList) => {
+            this.setState({ itemsList: itemsList })
+            this.setState({ modalShow: false })
+            this.state.itemsList.forEach((item) => {
+              if (this.getItemName(item, this.props) == 'none' || this.getItemName(item, this.props) == 'raw' || this.getItemName(item, this.props) == 'GraphQL') {
+                this.setState({ addButtonStyle: { ...this.state.addButtonStyle, ...{ display: 'none' } } })
+              }
+            });
+          }
           }
         />
       </>
