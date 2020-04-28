@@ -45,7 +45,7 @@ class ShowApi extends React.Component {
       <Container style={containerMarginStyle}>
         <Row>
           <Col>
-            {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={this.state.alert.alertMessage} onClose={this.onCloseAlert} />}
+            {this.state.alert.showAlert && <DismissibleAlert type='success' alertHeading={`🦄 ${this.state.alert.alertMessage}`} onClose={this.onCloseAlert} />}
             <Card>
               <Card.Header as="h5">API Details</Card.Header>
               <Card.Body>
