@@ -7,8 +7,6 @@ class BodiesController < ApplicationController
     if body.save
       api = Api.find params[:api_id]
       render json: api.bodies
-    else
-
     end
   end
 
@@ -18,18 +16,30 @@ class BodiesController < ApplicationController
       if body.update_rec(params)
         render json: body.api.bodies
       else
-        render json: {
-          status: 'error',
-          code: 600,
-          message: 'Record update failed'
-        }
+        render_json('error', 600, 'Record update failed')
       end
     else
-      render json: {
-        status: 'error',
-        code: 404,
-        message: 'Body not found'
-      }
+      render_json('error', 404, 'Body not found')
     end
+  end
+
+  def destroy
+    body = Body.find(params[:id])
+    api = body.api
+    if body.destroy
+      render json: api.bodies
+    else
+      render_json('error', 404, 'Delete failed')
+    end
+  end
+
+  private
+
+  def render_json(status, code, message)
+    render json: {
+      status: status,
+      code: code,
+      message: message
+    }
   end
 end

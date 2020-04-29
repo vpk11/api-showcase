@@ -102,7 +102,11 @@ class ResponseForm extends React.Component {
   deleteRecord(event) {
     event.preventDefault();
     const id = this.props.item.id
-    axios.delete(`/responses/${id}`)
+    axios({
+      method: 'DELETE',
+      url: `/responses/${id}`,
+      data: { authenticity_token: $('meta[name="csrf-token"]').attr('content') }
+    })
       .then((response) => {
         console.log(response.data);
         this.props.handleItemsList(response.data)
