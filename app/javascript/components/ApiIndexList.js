@@ -14,11 +14,14 @@ class ApiIndex extends React.Component {
     const eachDetailsCard = {
       marginBottom: '32px',
     };
-    const paramsList = this.props.parameters.map((param) => <ShowCaseListItem itemId={param.id} itemName={param.key} key={param.id}
-      onClick={(param) => (param)} />);
-    const headerList = this.props.headers.map((header) => header.key);
-    const bodyList = this.props.bodies.map((body) => body.key);
-    const responseList = this.props.responses.map((response) => response.key);
+    const paramsList = this.props.parameters.map((param) => <ShowCaseListItem itemId={param.id} itemName={param.key}
+      key={param.id} onClick={(param) => (param)} />);
+    const headerList = this.props.headers.map((header) => <ShowCaseListItem itemId={header.id} itemName={header.key}
+      key={header.id} onClick={(header) => (header)} />);
+    const bodyList = this.props.bodies.map((body) => <ShowCaseListItem itemId={body.id} itemName={body.key}
+      key={body.id} onClick={(body) => (body)} />);
+    const responseList = this.props.responses.map((response) => <ShowCaseListItem itemId={response.id} itemName={response.code}
+      key={response.id} onClick={(response) => (response)} />);
 
     return (
       <Card style={containerMarginStyle}>
