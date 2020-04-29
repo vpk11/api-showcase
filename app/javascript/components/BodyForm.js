@@ -112,7 +112,11 @@ class BodyForm extends React.Component {
   deleteRecord(event) {
     event.preventDefault();
     const id = this.props.item.id
-    axios.delete(`/bodies/${id}`)
+    axios({
+      method: 'DELETE',
+      url: `/bodies/${id}`,
+      data: { authenticity_token: $('meta[name="csrf-token"]').attr('content') }
+    })
       .then((response) => {
         console.log(response.data);
         this.props.handleItemsList(response.data)

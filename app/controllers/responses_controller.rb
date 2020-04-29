@@ -28,18 +28,30 @@ class ResponsesController < ApplicationController
       )
         render json: response.api.responses
       else
-        render json: {
-          status: 'error',
-          code: 600,
-          message: 'Record update failed'
-        }
+        render_json('error', 600, 'Record update failed')
       end
     else
-      render json: {
-        status: 'error',
-        code: 404,
-        message: 'Response not found'
-      }
+      render_json('error', 404, 'Response not found')
     end
+  end
+
+  def destroy
+    response = Response.find(params[:id])
+    api = response.api
+    if response.destroy
+      render json: api.responses
+    else
+      render_json('error', 404, 'Delete failed')
+    end
+  end
+
+  private
+
+  def render_json(status, code, message)
+    render json: {
+      status: status,
+      code: code,
+      message: message
+    }
   end
 end
