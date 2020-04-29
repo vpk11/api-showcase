@@ -98,7 +98,6 @@ class HeaderAndParamsForm extends React.Component {
   deleteRecord(event) {
     event.preventDefault();
     const id = this.props.item.id
-    // axios.delete(`/${this.props.formFor}/${id}`, { authenticity_token: $('meta[name="csrf-token"]').attr('content') })
     axios({
       method: 'DELETE',
       url: `/${this.props.formFor}/${id}`,
