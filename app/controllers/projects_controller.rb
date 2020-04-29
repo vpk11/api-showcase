@@ -3,7 +3,9 @@
 # Controller to manage requests to projects
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.includes(:versions).active
+    @projects = Project.includes(:versions).active.select(:id, :name)
+    @result = @projects.map {|project| {:projectId => project.id, :projectName => project.name, 
+      :versions => project.version_details}}
   end
 
   def new
@@ -25,4 +27,5 @@ class ProjectsController < ApplicationController
       @account = @user.account
     end
   end
+
 end
