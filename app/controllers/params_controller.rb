@@ -26,18 +26,30 @@ class ParamsController < ApplicationController
       )
         render json: param.api.params
       else
-        render json: {
-          status: 'error',
-          code: 600,
-          message: 'Record update failed'
-        }
+        render_json('error', 600, 'Record update failed')
       end
     else
-      render json: {
-        status: 'error',
-        code: 404,
-        message: 'Params not found'
-      }
+      render_json('error', 404, 'Params not found')
     end
+  end
+
+  def destroy
+    param = Param.find(params[:id])
+    api = param.api
+    if param.destroy
+      render json: api.params
+    else
+      render_json('error', 404, 'Delete failed')
+    end
+  end
+
+  private
+
+  def render_json(status, code, message)
+    render json: {
+      status: status,
+      code: code,
+      message: message
+    }
   end
 end
