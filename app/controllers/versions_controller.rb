@@ -39,6 +39,7 @@ class VersionsController < ApplicationController
   def update
     version = Version.find(params[:id])
     version.active = false;
+    version.deprecated = true;
     if version.save!
       version_json(version)
     end

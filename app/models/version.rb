@@ -3,5 +3,5 @@
 # Version Model
 class Version < ApplicationRecord
   belongs_to :project
-  has_many :apis
+  has_many :apis, dependent: :destroy
 end
