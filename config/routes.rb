@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'welcome', to: 'sessions#welcome'
   get 'authorized', to: 'sessions#page_requires_login'
+  get 'signup', to: 'users#new'
+  post 'signup', to: 'users#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :users, only: %i[new create]
   resources :versions
   resources :projects
   resources :apis
