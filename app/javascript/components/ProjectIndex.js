@@ -7,12 +7,21 @@ import ShowVersionList from "./ShowVersionList"
 import ShowcaseNav from "./ShowcaseNav"
 
 class ProjectIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: props.projects
+    }
+  }
+
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
     };
-    const projectsList = this.props.projects.map((project) => <ShowVersionList projectId={project.projectId}
-      projectName={project.projectName} versions={project.versions} key={project.projectId} />);
+    const projectsList = this.state.projects.map((project) => <ShowVersionList projectId={project.id}
+      projectName={project.projectName} versions={project.versions} key={project.id} handleChildClick={(projects) => {
+        this.setState({ projects: projects })
+      }} />);
     return (
       <Container fluid>
         <Row>

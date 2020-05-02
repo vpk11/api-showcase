@@ -2,6 +2,7 @@
 
 # Controller For Versions
 class VersionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
     @project = Project.first
     @version = @project.version
@@ -36,8 +37,31 @@ class VersionsController < ApplicationController
   end
 
   def update
+    version = Version.find(params[:id])
+    version.active = false;
+    if version.save!
+      version_json(version)
+    end
   end
 
   def destroy
+    version = Version.find(params[:id])
+    if version.destroy
+       version_json(version)
+    else
+      render json: {
+        status: 'error',
+        code: 600,
+        message: 'Record deletion failed'
+      }
+    end
   end
+
+  private
+
+  def version_json(version)
+    versions = version.project.versions.where(active: 'true').select(:id, :name).order(:id)
+    result = versions.map {|version| {:id => version.id, :name => version.name}}
+    render json: result
+  end 
 end

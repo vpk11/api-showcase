@@ -2,9 +2,10 @@
 
 # Controller to manage requests to projects
 class ProjectsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
-    @projects = Project.includes(:versions).active.select(:id, :name)
-    @result = @projects.map {|project| {:projectId => project.id, :projectName => project.name, 
+    @projects = Project.where(archived: 'false').includes(:versions).active.select(:id, :name).order(:id)
+    @result = @projects.map {|project| {:id => project.id, :projectName => project.name, 
       :versions => project.version_details}}
   end
 
@@ -27,5 +28,36 @@ class ProjectsController < ApplicationController
       @account = @user.account
     end
   end
+
+  def update
+    project = Project.find(params[:id])
+
+    project.archived = true;
+    if project.save!
+      project_json(project)
+    end
+  end
+
+  def destroy
+    project = Project.find(params[:id])
+    if project.destroy
+       project_json(project)
+    else
+      render json: {
+        status: 'error',
+        code: 600,
+        message: 'Record deletion failed'
+      }
+    end
+  end
+
+  private
+
+  def project_json(project)
+    projects = project.user.projects.where(archived: 'false').includes(:versions).active.select(:id, :name).order(:id)
+    result = projects.map {|project| {:id => project.id, :projectName => project.name, 
+      :versions => project.version_details}}
+    render json: result
+  end 
 
 end
