@@ -16,9 +16,10 @@ class ProjectIndex extends React.Component {
 
   render() {
     const containerMarginStyle = {
-      marginTop: '32px',
+      marginTop: '32px'
     };
-    const projectsList = this.state.projects.map((project) => <ShowVersionList projectId={project.id}
+
+    const projectsList = this.state.projects.map((project) => <ShowVersionList projectId={project.id} projectDescription={project.description}
       projectName={project.projectName} versions={project.versions} key={project.id} handleChildClick={(projects) => {
         this.setState({ projects: projects })
       }} />);
@@ -26,7 +27,7 @@ class ProjectIndex extends React.Component {
       <Container fluid>
         <Row>
           <Col>
-            <ShowcaseNav username={'kuttu'} />
+            <ShowcaseNav username={'kuttu'}/>
             <Container style={containerMarginStyle}>
               <Row>
                 <Col>

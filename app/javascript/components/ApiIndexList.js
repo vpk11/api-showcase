@@ -5,8 +5,35 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import CardDeck from 'react-bootstrap/CardDeck'
 import ShowCaseListItem from "./ShowCaseListItem"
+import {Row, Col} from "react-bootstrap"
+import axios from "axios"
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ArchiveIcon from '@material-ui/icons/Archive'
 
 class ApiIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = method => e => {
+    e.stopPropagation();
+    e.preventDefault();
+    const id = this.props.apiId;
+    console.log("clicked " + method);
+    axios({
+      method: method,
+      url: `/apis/${id}`,
+      data: { authenticity_token: $('meta[name="csrf-token"]').attr('content') }
+    })
+      .then((response) => {
+        console.log(response);
+        console.log(response.data);
+        this.props.handleChildClick(response.data);
+      });
+  };
+
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
@@ -14,6 +41,12 @@ class ApiIndex extends React.Component {
     const eachDetailsCard = {
       marginBottom: '32px',
     };
+    const deleteButtonStyle = {
+      fill: '#ff1744'
+    }
+    const archiveButtonStyle = {
+      fill: '#2979ff'
+    }
     const paramsList = this.props.parameters.map((param) => <ShowCaseListItem itemId={param.id} itemName={param.key}
       key={param.id} onClick={(param) => (param)} />);
     const headerList = this.props.headers.map((header) => <ShowCaseListItem itemId={header.id} itemName={header.key}
@@ -27,8 +60,12 @@ class ApiIndex extends React.Component {
       <Card style={containerMarginStyle}>
         <Accordion>
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            Api: {this.props.apiId}
-
+            <Row><Col>  Api: {this.props.apiId}</Col>
+              <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
+              </IconButton>
+              <IconButton aria-label="archive" onClick={this.handleChange('PATCH')}> <ArchiveIcon style={archiveButtonStyle} />
+              </IconButton>
+            </Row>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
@@ -111,7 +148,8 @@ ApiIndex.propTypes = {
   headers: PropTypes.array.isRequired,
   bodies: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  item: PropTypes.object
+  item: PropTypes.object,
+  handleChildClick: PropTypes.func
 }
 
 export default ApiIndex

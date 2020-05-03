@@ -4,8 +4,8 @@
 class ProjectsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
-    @projects = Project.where(archived: 'false').includes(:versions).active.select(:id, :name).order(:id)
-    @result = @projects.map {|project| {:id => project.id, :projectName => project.name, 
+    @projects = Project.where(archived: 'false').includes(:versions).active.select(:id, :name, :description).order(:id)
+    @result = @projects.map {|project| {:id => project.id, :projectName => project.name, :description => project.description,
       :versions => project.version_details}}
   end
 
@@ -31,8 +31,7 @@ class ProjectsController < ApplicationController
 
   def update
     project = Project.find(params[:id])
-
-    project.archived = true;
+    project.archived = true
     if project.save!
       project_json(project)
     end
@@ -54,8 +53,8 @@ class ProjectsController < ApplicationController
   private
 
   def project_json(project)
-    projects = project.user.projects.where(archived: 'false').includes(:versions).active.select(:id, :name).order(:id)
-    result = projects.map {|project| {:id => project.id, :projectName => project.name, 
+    projects = project.user.projects.where(archived: 'false').includes(:versions).active.select(:id, :name, :description).order(:id)
+    result = projects.map {|project| {:id => project.id, :projectName => project.name, :description => project.description,
       :versions => project.version_details}}
     render json: result
   end 

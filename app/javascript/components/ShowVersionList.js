@@ -9,7 +9,7 @@ import ShowVersionListItem from "./ShowVersionListItem"
 import axios from "axios"
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-import ArchiveIcon from '@material-ui/icons/Archive';
+import ArchiveIcon from '@material-ui/icons/Archive'
 
 class ShowVersionList extends React.Component {
   constructor(props) {
@@ -55,7 +55,11 @@ class ShowVersionList extends React.Component {
       textAlign: 'centre',
       marginTop: '10px',
       color: '#fff',
-
+    }
+    const aboutStyle = {
+      whiteSpace: 'pre-wrap',
+      wordwrap: 'break-word',
+      fontSize: '1.1rem'
     }
 
     const versionsList = this.state.versions.map((version) => <ShowVersionListItem itemId={version.id} itemName={version.name}
@@ -63,12 +67,12 @@ class ShowVersionList extends React.Component {
         this.setState({ versions: versions })
       }} />);
     return (
-      <Accordion style={containerMarginStyle} defaultActiveKey="0">
+      <Accordion style={containerMarginStyle} defaultActiveKey="0" >
         <Card>
           <Accordion.Toggle as={Card.Header} style={colStyle} eventKey="0">
             <Row>
               <Col>
-                <h3 style={projectnameStyle}>{this.props.projectName}</h3>
+                <h4 style={projectnameStyle}>{this.props.projectName}</h4>
               </Col>
               <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
               </IconButton>
@@ -79,6 +83,9 @@ class ShowVersionList extends React.Component {
           <Accordion.Collapse eventKey="0">
             <Card.Body>
               <ListGroup>
+                <Card body><xmp style={aboutStyle}>   {this.props.projectDescription}</xmp></Card>
+              </ListGroup>
+              <ListGroup style={containerMarginStyle}>
                 {versionsList}
               </ListGroup>
             </Card.Body>
@@ -93,6 +100,7 @@ ShowVersionList.propTypes = {
   style: PropTypes.object,
   projectId: PropTypes.number.isRequired,
   projectName: PropTypes.string.isRequired,
+  projectDescription: PropTypes.string.isRequired,
   versions: PropTypes.array.isRequired,
   item: PropTypes.object,
   handleChildClick: PropTypes.func
