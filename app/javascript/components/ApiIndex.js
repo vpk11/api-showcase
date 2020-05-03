@@ -7,13 +7,19 @@ import ShowcaseNav from "./ShowcaseNav"
 import ApiIndexList from "./ApiIndexList"
 
 class ApiIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      apis: props.apis
+    }
+  }
   render() {
     const containerMarginStyle = {
       marginTop: '32px',
     };
-    const apisList = this.props.apis.map((api) => <ApiIndexList apiId={api.apiId} apiMethod={api.apiMethod}
+    const apisList = this.state.apis.map((api) => <ApiIndexList apiId={api.apiId} apiMethod={api.apiMethod}
       apiEndPoint={api.apiEndPoint} apiDescription={api.apiDescription} parameters={api.parameters}
-      headers={api.headers} bodies={api.bodies} responses={api.responses} key={api.apiId} />);
+      headers={api.headers} bodies={api.bodies} responses={api.responses} key={api.apiId} handleChildClick={(apis) => { this.setState({ apis: apis }) }} />);
 
     return (
       <Container fluid>

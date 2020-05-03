@@ -46,7 +46,7 @@ class ShowVersionListItem extends React.Component {
       <ListGroup.Item style={this.props.style} onClick={() => console.log('clicked')} >
         <Row>
           <Col>
-            <h5 style={versionNameStyle}><a href={"http://localhost:3000/versions/" + this.props.itemId}>{this.props.itemName}</a></h5>
+            <h6 style={versionNameStyle}><a href={"http://localhost:3000/versions/" + this.props.itemId}>{this.props.itemName}</a></h6>
           </Col>
           <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
           </IconButton>

@@ -27,7 +27,7 @@ class VersionsController < ApplicationController
 
   def show
     @version = Version.find(params[:id])
-    @apis = @version.apis
+    @apis = @version.apis.where(archived: 'false')
     @result = @apis.map {|api| {:apiId => api.id, :apiMethod => api.method, :apiEndPoint => api.end_point, 
       :apiDescription => api.description, :parameters => api.params.as_json, :headers => api.headers.as_json, 
       :bodies => api.bodies.as_json, :responses => api.responses.as_json}}
