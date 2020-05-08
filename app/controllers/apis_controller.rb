@@ -30,9 +30,7 @@ class ApisController < ApplicationController
   def update
     api = Api.find(params[:id])
     api.archived = true
-    if api.save!
-      api_json(api)
-    end
+    api_json(api) if api.save!
   end
 
   def destroy
@@ -51,10 +49,8 @@ class ApisController < ApplicationController
   private
 
   def api_json(api)
-    apis = api.version.apis.where(archived: 'false')
-    @result = apis.map {|api| {:apiId => api.id, :apiMethod => api.method, :apiEndPoint => api.end_point, 
-      :apiDescription => api.description, :parameters => api.params.as_json, :headers => api.headers.as_json, 
-      :bodies => api.bodies.as_json, :responses => api.responses.as_json}}
-      render json: @result
+    version = api.version
+    results = version.api_details
+    render json: results
   end
 end

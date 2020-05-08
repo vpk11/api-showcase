@@ -5,11 +5,12 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import CardDeck from 'react-bootstrap/CardDeck'
 import ShowCaseListItem from "./ShowCaseListItem"
-import {Row, Col} from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import axios from "axios"
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
+import humps from 'humps';
 
 class ApiIndex extends React.Component {
   constructor(props) {
@@ -29,8 +30,8 @@ class ApiIndex extends React.Component {
     })
       .then((response) => {
         console.log(response);
-        console.log(response.data);
-        this.props.handleChildClick(response.data);
+        console.log(humps.camelizeKeys(response.data));
+        this.props.handleChildClick(humps.camelizeKeys(response.data));
       });
   };
 
