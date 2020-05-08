@@ -26,34 +26,26 @@ class VersionsController < ApplicationController
   end
 
   def show
-    @version = Version.find(params[:id])
-    @apis = @version.apis.where(archived: 'false')
-    @result = @apis.map {|api| {:apiId => api.id, :apiMethod => api.method, :apiEndPoint => api.end_point, 
-      :apiDescription => api.description, :parameters => api.params.as_json, :headers => api.headers.as_json, 
-      :bodies => api.bodies.as_json, :responses => api.responses.as_json}}
+    version = Version.find(params[:id])
+    @results = version.api_details
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     version = Version.find(params[:id])
-    version.active = false;
-    version.deprecated = true;
-    if version.save!
-      version_json(version)
-    end
+    version.active = false
+    version.deprecated = true
+    version_json(version) if version.save!
   end
 
   def destroy
     version = Version.find(params[:id])
     if version.destroy
-       version_json(version)
+      version_json(version)
     else
       render json: {
-        status: 'error',
-        code: 600,
-        message: 'Record deletion failed'
+        status: 'error', code: 600, message: 'Record deletion failed'
       }
     end
   end
@@ -61,8 +53,8 @@ class VersionsController < ApplicationController
   private
 
   def version_json(version)
-    versions = version.project.versions.where(active: 'true').select(:id, :name).order(:id)
-    result = versions.map {|version| {:id => version.id, :name => version.name}}
-    render json: result
-  end 
+    project = version.project
+    results = project.version_details
+    render json: results
+  end
 end

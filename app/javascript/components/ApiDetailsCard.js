@@ -63,7 +63,7 @@ class ApiDetailsCard extends React.Component {
     this.setState({ modalShow: true })
     this.setState({ item: item })
   }
-  
+
   render() {
     const listItemStyle = {
       fontSize: 'small',

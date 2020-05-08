@@ -10,6 +10,7 @@ import axios from "axios"
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
+import humps from 'humps'
 
 class ShowVersionList extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class ShowVersionList extends React.Component {
       .then((response) => {
         console.log(response);
         console.log(response.data);
-        this.props.handleChildClick(response.data);
+        this.props.handleChildClick(humps.camelizeKeys(response.data));
       });
   };
 
