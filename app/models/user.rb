@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :projects
 
   def project_details
-    projects.where(archived: false).includes(:versions).active
-            .select(:id, :name, :description).order(:id).map do |pr|
+    projects.left_outer_joins(:versions).active.distinct
+            .select(:id, :name, :description).map do |pr|
       {
         id: pr.id, project_name: pr.name, description: pr.description,
         versions: pr.version_details
@@ -16,3 +16,5 @@ class User < ApplicationRecord
     end
   end
 end
+
+# sql = "SELECT projects.id, projects.name, projects.description FROM projects LEFT JOIN versions ON projects.id = versions.project_id AND versions.active = true WHERE projects.archived = false"
