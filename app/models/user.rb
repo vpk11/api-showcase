@@ -16,5 +16,3 @@ class User < ApplicationRecord
     end
   end
 end
-
-# sql = "SELECT projects.id, projects.name, projects.description FROM projects LEFT JOIN versions ON projects.id = versions.project_id AND versions.active = true WHERE projects.archived = false"
