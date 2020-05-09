@@ -5,6 +5,9 @@ class Version < ApplicationRecord
   belongs_to :project
   has_many :apis, dependent: :destroy
 
+  scope :active, -> { where(active: true, deprecated: false) }
+
+
   def api_details
     apis.where(archived: false).map do |api|
       {
