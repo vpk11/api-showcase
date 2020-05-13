@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <% if @error %>
   <%= react_component('Login', {alertType: 'error', showAlert: true, alertMessage: @error}) %>
 <% else %>
