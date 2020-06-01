@@ -16,6 +16,7 @@ class User < ApplicationRecord
         versions: pr.version_details
       }
     end
+  end
   private
 
   def ensure_account_exists
