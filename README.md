@@ -8,7 +8,7 @@ Steps are necessary to get the
 application up and running.
 
 ##### Prerequisites 
-The setups steps expect following tools installed on the system.
+The setups steps expect following to be installed on the system.
 
 - Ruby [2.6.5] 
 - Rails [6.0.2.2]
