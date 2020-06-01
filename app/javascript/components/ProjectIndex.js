@@ -1,37 +1,40 @@
-import React from "react"
+import React, { version } from "react"
 import PropTypes from "prop-types"
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import ShowCaseListItem from './ShowCaseListItem'
+import ShowVersionList from "./ShowVersionList"
+import ShowcaseNav from "./ShowcaseNav"
+
 class ProjectIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: props.projects
+    }
+  }
+
   render() {
     const containerMarginStyle = {
-      marginTop: '32px',
+      marginTop: '32px'
     };
-    const apisList = this.props.versions.map((version) => <ShowCaseListItem itemId={version.id} itemName={version.name}
-      key={version.id} />);
+
+    const projectsList = this.state.projects.map((project) => <ShowVersionList projectId={project.id} projectDescription={project.description}
+      projectName={project.projectName} versions={project.versions} key={project.id} handleChildClick={(projects) => {
+        this.setState({ projects: projects })
+      }} />);
     return (
-      <Container style={containerMarginStyle}>
+      <Container fluid>
         <Row>
           <Col>
-            <Accordion defaultActiveKey="0">
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
-                  {this.props.projectName}
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <ListGroup>
-                      {apisList}
-                    </ListGroup>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
+            <ShowcaseNav username={'kuttu'}/>
+            <Container style={containerMarginStyle}>
+              <Row>
+                <Col>
+                  {projectsList}
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>
@@ -40,9 +43,7 @@ class ProjectIndex extends React.Component {
 }
 
 ProjectIndex.propTypes = {
-  projectId: PropTypes.number.isRequired,
-  projectName: PropTypes.string.isRequired,
-  versions: PropTypes.array.isRequired,
+  projects: PropTypes.array.isRequired
 }
 
 export default ProjectIndex

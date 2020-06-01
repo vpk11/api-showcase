@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import VerticallyCenteredModal from './VerticallyCenteredModal'
+
 class ApiDetailsCard extends React.Component {
   constructor(props) {
     super(props);
@@ -63,9 +64,7 @@ class ApiDetailsCard extends React.Component {
     this.setState({ item: item })
   }
 
-
   render() {
-
     const listItemStyle = {
       fontSize: 'small',
       cursor: 'pointer',
