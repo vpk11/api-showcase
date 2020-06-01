@@ -18,8 +18,8 @@ The setups steps expect following tools installed on the system.
 ##### 3. Install the required gems using
 ```bundle install```
 ##### 4. Create and setup the database Run the following commands to create and setup the database. 
-```rake db:create ```
-```rake db:migrate ``` 
+```rake db:prepare```
+
 ##### 5. Start the Rails server You can start the rails server using the command given below. 
 ```rails s ```
 And now you can visit the site with the URL http://localhost:3000
