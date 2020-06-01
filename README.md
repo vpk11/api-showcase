@@ -25,6 +25,7 @@ The setups steps expect following to be installed on the system.
 
 ##### 5. Start the Rails server You can start the rails server using the command given below. 
 ```rails s ```
+
 And now you can visit the site with the URL http://localhost:3000
 
 
