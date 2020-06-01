@@ -27,5 +27,7 @@ class SessionsController < ApplicationController
 
   def login; end
 
-  def welcome; end
+  def welcome
+    redirect_to projects_path if logged_in?
+  end
 end
