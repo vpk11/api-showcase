@@ -9,8 +9,9 @@ application up and running.
 
 ##### Prerequisites 
 The setups steps expect following tools installed on the system.
-- Github 
+
 - Ruby [2.6.3] 
+- Rails [6.0.2]
 
 
 ##### 1. Check out the repository 
