@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Background from '../../assets/images/welcomeBg.jpg'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,9 +12,6 @@ class Welcome extends React.Component {
   }
 
   render() {
-    const sectionStyle = {
-      backgroundImage: `url(${Background})`
-    };
 
     return (
       <Container fluid>
