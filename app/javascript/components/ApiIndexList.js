@@ -26,7 +26,7 @@ class ApiIndex extends React.Component {
     axios({
       method: method,
       url: `/apis/${id}`,
-      data: { authenticity_token: $('meta[name="csrf-token"]').attr('content') }
+      headers: { Record: 'Api', authenticity_token: $('meta[name="csrf-token"]').attr('content') }
     })
       .then((response) => {
         console.log(response);
