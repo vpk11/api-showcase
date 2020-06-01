@@ -26,18 +26,30 @@ class HeadersController < ApplicationController
       )
         render json: header.api.headers
       else
-        render json: {
-          status: 'error',
-          code: 600,
-          message: 'Record update failed'
-        }
+        render_json('error', 600, 'Record update failed')
       end
     else
-      render json: {
-        status: 'error',
-        code: 404,
-        message: 'Header not found'
-      }
+      render_json('error', 404, 'Header not found')
     end
+  end
+
+  def destroy
+    header = Header.find(params[:id])
+    api = header.api
+    if header.destroy
+      render json: api.headers
+    else
+      render_json('error', 404, 'Delete failed')
+    end
+  end
+
+  private
+
+  def render_json(status, code, message)
+    render json: {
+      status: status,
+      code: code,
+      message: message
+    }
   end
 end
