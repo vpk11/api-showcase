@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import ListGroup from 'react-bootstrap/ListGroup'
 class ShowCaseListItem extends React.Component {
-  render () {
+  render() {
     return (
       <ListGroup.Item style={this.props.style} onClick={this.props.onClick(this.props.item)} >
         {this.props.itemName}
