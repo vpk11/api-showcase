@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: api_showcase_new_development
+  database: api_development
   host: localhost
 
   # The specified database role being used to connect to postgres.
@@ -81,5 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: api_showcase_new_production
-  host: localhost
+  url: <%= ENV['DATABASE_URL'] %>
