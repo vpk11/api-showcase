@@ -13,7 +13,8 @@ class Version < ApplicationRecord
       {
         api_id: api.id, api_method: api.method, api_end_point: api.end_point,
         api_description: api.description, parameters: api.params,
-        headers: api.headers, bodies: api.bodies, responses: api.responses
+        headers: api.headers, bodies: api.bodies, responses: api.responses,
+        version_id: api.version_id
       }
     end
   end

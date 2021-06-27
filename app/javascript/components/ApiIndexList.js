@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import CardDeck from 'react-bootstrap/CardDeck'
 import ShowCaseListItem from "./ShowCaseListItem"
-import { Row, Col } from "react-bootstrap"
+import { Row, Col, Button } from "react-bootstrap"
 import axios from "axios"
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -23,9 +23,10 @@ class ApiIndex extends React.Component {
     e.preventDefault();
     const id = this.props.apiId;
     console.log("clicked " + method);
+    const url = method == 'DELETE' ? `/apis/${id}` : `/apis/${id}/archive`
     axios({
       method: method,
-      url: `/apis/${id}`,
+      url: url,
       headers: { Record: 'Api', authenticity_token: $('meta[name="csrf-token"]').attr('content') }
     })
       .then((response) => {
@@ -48,6 +49,9 @@ class ApiIndex extends React.Component {
     const archiveButtonStyle = {
       fill: '#2979ff'
     }
+    const editApiButtonStyle = {
+      float: 'right'
+    };
     const paramsList = this.props.parameters.map((param) => <ShowCaseListItem itemId={param.id} itemName={param.key}
       key={param.id} onClick={(param) => (param)} />);
     const headerList = this.props.headers.map((header) => <ShowCaseListItem itemId={header.id} itemName={header.key}
@@ -61,7 +65,7 @@ class ApiIndex extends React.Component {
       <Card style={containerMarginStyle}>
         <Accordion>
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            <Row><Col>  Api: {this.props.apiId}</Col>
+            <Row><Col><b>{this.props.apiMethod}</b> {this.props.apiEndPoint}</Col>
               <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
               </IconButton>
               <IconButton aria-label="archive" onClick={this.handleChange('PATCH')}> <ArchiveIcon style={archiveButtonStyle} />
@@ -70,18 +74,17 @@ class ApiIndex extends React.Component {
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <div style={eachDetailsCard}>
-                <h6>Method</h6>
-                <div>{this.props.apiMethod}</div>
-              </div>
-              <div style={eachDetailsCard}>
-                <h6>Endpoint</h6>
-                <div>{this.props.apiEndPoint}</div>
-              </div>
-              <div style={eachDetailsCard}>
-                <h6>Description</h6>
-                <div>{this.props.apiDescription}</div>
-              </div>
+              <Row>
+                <Col sm={8}>
+                  <div style={eachDetailsCard}>
+                    <h6>Description</h6>
+                    <div>{this.props.apiDescription}</div>
+                  </div>
+                </Col>
+                <Col sm={4}>
+                <Button variant="outline-primary" style={editApiButtonStyle} href={`/apis/${this.props.apiId}/edit`}>Edit</Button>
+                </Col>
+              </Row>
               <CardDeck>
                 <Accordion>
                   <Card>
