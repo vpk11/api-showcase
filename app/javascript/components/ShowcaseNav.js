@@ -17,6 +17,9 @@ class ShowcaseNav extends React.Component {
             <Nav.Link eventKey={2} href="#">
               {this.props.username}
             </Nav.Link>
+            {!this.props.hideLogout &&
+              <Nav.Link eventKey={2} href="/logout">Logout</Nav.Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -26,6 +29,7 @@ class ShowcaseNav extends React.Component {
 
 ShowcaseNav.propTypes = {
   username: PropTypes.string,
+  hideLogout: PropTypes.bool,
 }
 
 export default ShowcaseNav
