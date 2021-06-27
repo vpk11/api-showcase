@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/', to: 'sessions#welcome'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
+  get 'logout', to: 'sessions#logout'
   get 'welcome', to: 'sessions#welcome'
   get 'authorized', to: 'sessions#page_requires_login'
   get 'signup', to: 'users#new'
