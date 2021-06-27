@@ -4,7 +4,7 @@
 class ApisController < ApplicationController
   skip_before_action :verify_authenticity_token
   def new
-    @version = Version.first
+    @version = Version.find(params[:version_id])
     @methods = Api::METHODS
   end
 
@@ -27,7 +27,15 @@ class ApisController < ApplicationController
     @responses = @api.responses
   end
 
+  def edit
+    # TODO: Implement this method
+  end
+
   def update
+    # TODO: Implement record update here
+  end
+
+  def archive
     api = Api.find(params[:id])
     api.archived = true
     api_json(api) if api.save!
