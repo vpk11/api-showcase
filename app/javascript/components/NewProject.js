@@ -58,9 +58,12 @@ class NewProject extends React.Component {
                     <input type="hidden" name="user_id" value={this.props.userId} />
                     <input type="hidden" name="account_id" value={this.props.accountId} />
                     <CsrfInput />
-                    <Button variant="dark" type="submit" style={saveButtonStyle} >
-                      Create Project
-                    </Button>
+                    <div style={saveButtonStyle}>
+                      <Button variant="dark" type="submit">
+                        Create Project
+                      </Button>{' '}
+                      <Button variant="danger" href="/projects">Cancel</Button>
+                    </div>
                   </Form>
                 </Col>
               </Row>
