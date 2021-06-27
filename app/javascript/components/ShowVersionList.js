@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ShowVersionListItem from "./ShowVersionListItem"
 import axios from "axios"
@@ -62,6 +63,9 @@ class ShowVersionList extends React.Component {
       wordwrap: 'break-word',
       fontSize: '1.1rem'
     }
+    const newVersionButtonStyle = {
+      float: 'right'
+    };
 
     const versionsList = this.state.versions.map((version) => <ShowVersionListItem itemId={version.id} itemName={version.name}
       key={version.id} handleVersionListClick={(versions) => {
@@ -84,7 +88,14 @@ class ShowVersionList extends React.Component {
           <Accordion.Collapse eventKey="0">
             <Card.Body>
               <ListGroup>
-                <Card body><xmp style={aboutStyle}>   {this.props.projectDescription}</xmp></Card>
+              <Row>
+                <Col>
+                  {this.props.projectDescription}
+                </Col>
+                <Col>
+                  <Button variant="outline-primary" style={newVersionButtonStyle} size="sm" href="/versions/new">New Version</Button>
+                </Col>
+              </Row>
               </ListGroup>
               <ListGroup style={containerMarginStyle}>
                 {versionsList}
