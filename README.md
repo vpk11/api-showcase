@@ -28,6 +28,40 @@ The setups steps expect following to be installed on the system.
 
 And now you can visit the site with the URL http://localhost:3000
 
+### Docker Setup
+> If permission issue -> run as `sudo`
+- Run container:
+```shell
+docker-compose up -d
+```
+  > `-d` will run the containers in the background 
+- Check container status:
+```shell
+docker-compose ps
+```
+- Create DB:
+```shell
+docker-compose exec app bundle exec rake db:create
+```
+- Run migrations:
+```shell
+docker-compose exec app bundle exec rake db:migrate
+```
+- Check container logs:
+```shell
+docker-compose logs
+```
+- Stop container:
+```shell
+docker-compose down
+```
+- Rails console:
+```shell
+docker-compose exec app bundle exec rails c
+```
+
+---
+
 
 
 
