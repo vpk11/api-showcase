@@ -28,6 +28,7 @@ The setups steps expect following to be installed on the system.
 
 And now you can visit the site with the URL http://localhost:3000
 
+---
 ### Docker Setup
 > If permission issue -> run as `sudo`
 - Run container:
@@ -62,7 +63,8 @@ docker-compose exec app bundle exec rails c
 
 ---
 
-
+## References🚀
+ - Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
 
 
