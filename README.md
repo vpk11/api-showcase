@@ -61,6 +61,7 @@ docker-compose down
 docker-compose exec app bundle exec rails c
 ```
 And now you can visit the site with the URL http://localhost:3000
+
 ---
 
 ### References🚀
