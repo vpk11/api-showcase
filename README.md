@@ -1,6 +1,6 @@
-# README
+# API Showcase
 
-API Showcase: A Rails app built to effectively document API's with less pain. Used react-rails gem for frontend.
+> A Rails app built to effectively document API's with less pain. Used react-rails gem for frontend.
 
 Database Design : https://docs.google.com/presentation/d/1cZYI9bd6ipyHyINMdwVVOA_ebdvjbFWI8Pwzgt2vWQs/edit?usp=sharing
 
@@ -11,7 +11,7 @@ application up and running.
 The setups steps expect following to be installed on the system.
 
 - Ruby [2.6.5] 
-- Rails [6.0.2.2]
+- Rails [6.0.4]
 
 
 ##### 1. Check out the repository 
@@ -60,7 +60,7 @@ docker-compose down
 ```shell
 docker-compose exec app bundle exec rails c
 ```
-
+And now you can visit the site with the URL http://localhost:3000
 ---
 
 ### References🚀
