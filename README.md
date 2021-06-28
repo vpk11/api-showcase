@@ -65,7 +65,7 @@ And now you can visit the site with the URL http://localhost:3000
 ---
 
 ### References🚀
- - Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+ - Docker: https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose
 
 
 
