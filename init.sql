@@ -1,0 +1,2 @@
+CREATE USER alpha_user;
+ALTER USER alpha_user WITH SUPERUSER;
