@@ -41,7 +41,7 @@ class Login extends React.Component {
       <Container fluid>
         <Row>
           <Col>
-            <ShowcaseNav />
+            <ShowcaseNav hideLogout={true} />
             <Container style={containerMarginStyle}>
               <Row>
                 <Col>
@@ -70,11 +70,11 @@ class Login extends React.Component {
                         <CsrfInput />
 
                         <button type="submit" className="btn btn-primary btn-block">Submit</button>
-                        <p className="forgot-password text-right">
+                        {/* <p className="forgot-password text-right">
                           <a href="#">Forgot password?</a>
-                        </p>
+                        </p> */}
                         <p className="forgot-password text-right">
-                          <a href="/signup">Sign Up!</a>
+                          Not registered yet <a href="/signup">Sign Up!</a>
                         </p>
                       </form>
                     </div>

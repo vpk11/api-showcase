@@ -27,6 +27,11 @@ class SessionsController < ApplicationController
 
   def login; end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to '/welcome'
+  end
+
   def welcome
     redirect_to projects_path if logged_in?
   end
