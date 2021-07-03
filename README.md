@@ -60,6 +60,14 @@ docker-compose down
 ```shell
 docker-compose exec app bundle exec rails c
 ```
+- Delete all containers:
+```shell
+docker rm -f $(docker ps -a -q)
+```
+- Delete all volumes:
+```shell
+docker volume rm $(docker volume ls -q)
+```
 And now you can visit the site with the URL http://localhost:3000
 
 ---
