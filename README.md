@@ -65,6 +65,7 @@ docker-compose exec app bundle exec rails c
 ```shell
 docker rm -f $(docker ps -a -q)
 ```
+  > In almost all cases `docker-compose down` removes the containers. Use the above command to cross-verify.
 - Delete all volumes:
 ```shell
 docker volume rm $(docker volume ls -q)
