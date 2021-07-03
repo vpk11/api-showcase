@@ -40,6 +40,7 @@ docker-compose up -d
 ```shell
 docker-compose ps
 ```
+  > `docker-compose ps -a` will list status of containers that exited with error
 - Create DB:
 ```shell
 docker-compose exec app bundle exec rake db:create
