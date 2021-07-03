@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 import ShowcaseNav from "./ShowcaseNav"
 import ApiIndexList from "./ApiIndexList"
 
@@ -17,6 +18,9 @@ class ApiIndex extends React.Component {
     const containerMarginStyle = {
       marginTop: '32px',
     };
+    const newApiButtonStyle = {
+      float: 'right'
+    };
 
     const apisList = this.state.apis.map((api) => <ApiIndexList apiId={api.apiId} apiMethod={api.apiMethod}
       apiEndPoint={api.apiEndPoint} apiDescription={api.apiDescription} parameters={api.parameters}
@@ -28,6 +32,11 @@ class ApiIndex extends React.Component {
           <Col>
             <ShowcaseNav username={'kuttu'} />
             <Container style={containerMarginStyle}>
+              <Row>
+                <Col>
+                  <Button variant="outline-primary" style={newApiButtonStyle} href={`/versions/${this.props.versionId}/apis/new`}>New API</Button>
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   {apisList}
@@ -42,7 +51,8 @@ class ApiIndex extends React.Component {
 }
 
 ApiIndex.propTypes = {
-  apis: PropTypes.array.isRequired
+  apis: PropTypes.array.isRequired,
+  versionId: PropTypes.number.isRequired,
 }
 
 export default ApiIndex

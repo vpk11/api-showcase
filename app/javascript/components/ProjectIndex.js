@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 import ShowVersionList from "./ShowVersionList"
 import ShowcaseNav from "./ShowcaseNav"
 
@@ -19,6 +20,10 @@ class ProjectIndex extends React.Component {
       marginTop: '32px'
     };
 
+    const newProjectButtonStyle = {
+      float: 'right'
+    };
+
     const projectsList = this.state.projects.map((project) => <ShowVersionList projectId={project.id} projectDescription={project.description}
       projectName={project.projectName} versions={project.versions} key={project.id} handleChildClick={(projects) => {
         this.setState({ projects: projects })
@@ -29,6 +34,11 @@ class ProjectIndex extends React.Component {
           <Col>
             <ShowcaseNav username={'kuttu'}/>
             <Container style={containerMarginStyle}>
+              <Row>
+                <Col>
+                  <Button variant="outline-primary" style={newProjectButtonStyle} href="/projects/new">New Project</Button>
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   {projectsList}

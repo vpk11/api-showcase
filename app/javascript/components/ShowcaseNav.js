@@ -8,7 +8,7 @@ class ShowcaseNav extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">API SHOWCASE</Navbar.Brand>
+        <Navbar.Brand href="/projects">API SHOWCASE</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -17,6 +17,9 @@ class ShowcaseNav extends React.Component {
             <Nav.Link eventKey={2} href="#">
               {this.props.username}
             </Nav.Link>
+            {!this.props.hideLogout &&
+              <Nav.Link eventKey={2} href="/logout">Logout</Nav.Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -26,6 +29,7 @@ class ShowcaseNav extends React.Component {
 
 ShowcaseNav.propTypes = {
   username: PropTypes.string,
+  hideLogout: PropTypes.bool,
 }
 
 export default ShowcaseNav

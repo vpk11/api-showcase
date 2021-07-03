@@ -1,6 +1,6 @@
-# README
+# API Showcase
 
-API Showcase: A Rails app built to effectively document API's with less pain. Used react-rails gem for frontend.
+> A Rails app built to effectively document API's with less pain. Used react-rails gem for frontend.
 
 Database Design : https://docs.google.com/presentation/d/1cZYI9bd6ipyHyINMdwVVOA_ebdvjbFWI8Pwzgt2vWQs/edit?usp=sharing
 
@@ -11,7 +11,7 @@ application up and running.
 The setups steps expect following to be installed on the system.
 
 - Ruby [2.6.5] 
-- Rails [6.0.2.2]
+- Rails [6.0.4]
 
 
 ##### 1. Check out the repository 
@@ -28,7 +28,56 @@ The setups steps expect following to be installed on the system.
 
 And now you can visit the site with the URL http://localhost:3000
 
+---
+### Docker Setup🚀
+> If permission issue -> run as `sudo`
+- Run container:
+```shell
+docker-compose up -d
+```
+  > `-d` will run the containers in the background 
+- Check container status:
+```shell
+docker-compose ps
+```
+  > `docker-compose ps -a` will list status of containers that exited with error
+- Create DB:
+```shell
+docker-compose exec app bundle exec rake db:create
+```
+- Run migrations:
+```shell
+docker-compose exec app bundle exec rake db:migrate
+```
+- Check container logs:
+```shell
+docker-compose logs
+```
+- Stop container:
+```shell
+docker-compose down
+```
+- Rails console:
+```shell
+docker-compose exec app bundle exec rails c
+```
+- Delete all containers:
+```shell
+docker rm -f $(docker ps -a -q)
+```
+  > In almost all cases `docker-compose down` removes the containers. Use the above command to cross-verify.
+- Delete all volumes:
+```shell
+docker volume rm $(docker volume ls -q)
+```
+And now you can visit the site with the URL http://localhost:3000
 
+---
+
+### References🚀
+ - Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+ - Docker Compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+ - Dockerize the app: https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose
 
 
 

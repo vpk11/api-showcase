@@ -136,3 +136,4 @@ yarn-debug.log*
 /public/uploads
 /config/database.yml
 .gitignore
+.env
