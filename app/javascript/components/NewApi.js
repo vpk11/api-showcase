@@ -51,7 +51,7 @@ class NewApi extends React.Component {
                   {this.state.show &&
                     <DismissibleAlert type='error' alertList={this.props.errors} alertHeading={ALERT_HEADING.error} onClose={() => this.setState({ show: false })} />
                   }
-                  <Form action="/apis" method="POST" >
+                  <Form action={`/versions/${this.props.versionId}/apis`} method="POST" >
                     <Card>
                       <Card.Header as="h5">Create Api Doc({this.props.versionName})</Card.Header>
                       <Card.Body>

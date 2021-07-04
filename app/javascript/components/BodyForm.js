@@ -36,7 +36,7 @@ class BodyForm extends React.Component {
             data_type: item.data_type,
             data: item.data,
             graphql_query: item.graphql_query,
-            graphql_variables: item.graphql_variables,
+            graphql_variable: item.graphql_variable,
             description: item.description,
           }
         },
@@ -228,9 +228,9 @@ class BodyForm extends React.Component {
             controlId='GraphQLVariablesField'
             label='GraphQL Variables' type='textarea'
             rows={2}
-            name='graphql_variables'
+            name='graphql_variable'
             onChange={this.handleChange}
-            defaultValue={this.props.item && this.props.item.graphql_variables}
+            defaultValue={this.props.item && this.props.item.graphql_variable}
             required={true}
           />
         }

@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import axios from "axios"
+import { archiveRecord } from "./utils/ArchiveRecord";
 
 class ShowVersionListItem extends React.Component {
   constructor(props) {
@@ -46,11 +47,11 @@ class ShowVersionListItem extends React.Component {
       <ListGroup.Item style={this.props.style} onClick={() => console.log('clicked')} >
         <Row>
           <Col>
-            <h6 style={versionNameStyle}><a href={"http://localhost:3000/versions/" + this.props.itemId}>{this.props.itemName}</a></h6>
+            <h6 style={versionNameStyle}><a href={`/versions/${this.props.itemId}`}>{this.props.itemName}</a></h6>
           </Col>
           <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
           </IconButton>
-          <IconButton aria-label="archive" onClick={this.handleChange('PATCH')}> <ArchiveIcon style={archiveButtonStyle} />
+          <IconButton aria-label="archive" onClick={archiveRecord("Version", this.props.itemId, this.props.handleChildClick)}> <ArchiveIcon style={archiveButtonStyle} />
           </IconButton>
         </Row>
       </ListGroup.Item>

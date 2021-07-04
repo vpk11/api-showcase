@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import humps from 'humps';
+import { archiveRecord } from "./utils/ArchiveRecord";
 
 class ApiIndex extends React.Component {
   constructor(props) {
@@ -23,11 +24,10 @@ class ApiIndex extends React.Component {
     e.preventDefault();
     const id = this.props.apiId;
     console.log("clicked " + method);
-    const url = method == 'DELETE' ? `/apis/${id}` : `/apis/${id}/archive`
     axios({
       method: method,
-      url: url,
-      headers: { Record: 'Api', authenticity_token: $('meta[name="csrf-token"]').attr('content') }
+      url: `/apis/${id}`,
+      data: { authenticity_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
     })
       .then((response) => {
         console.log(response);
@@ -68,7 +68,8 @@ class ApiIndex extends React.Component {
             <Row><Col><b>{this.props.apiMethod}</b> {this.props.apiEndPoint}</Col>
               <IconButton aria-label="delete" onClick={this.handleChange('DELETE')}> <DeleteIcon style={deleteButtonStyle} />
               </IconButton>
-              <IconButton aria-label="archive" onClick={this.handleChange('PATCH')}> <ArchiveIcon style={archiveButtonStyle} />
+              <IconButton aria-label="archive" onClick={archiveRecord("Api", this.props.apiId, this.props.handleChildClick)}>
+                <ArchiveIcon style={archiveButtonStyle} />
               </IconButton>
             </Row>
           </Accordion.Toggle>
