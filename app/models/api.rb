@@ -17,4 +17,8 @@ class Api < ApplicationRecord
       archived: params[:archived]
     )
   end
+
+  def archive_record
+    self.update(archived: true)
+  end
 end

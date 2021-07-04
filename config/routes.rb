@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
   patch 'apis/:id/archive', to: 'apis#archive'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  patch 'archives', to: 'archives#update'
+  patch 'archives/:id', to: 'archives#update'
 
   resources :versions
   resources :projects

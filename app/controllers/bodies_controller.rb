@@ -4,42 +4,31 @@
 class BodiesController < ApplicationController
   def create
     body = Body.init(params)
+    
     if body.save
       api = Api.find params[:api_id]
-      render json: api.bodies
+      render json: api.bodies, status: :ok
     end
   end
 
   def update
     body = Body.find(params[:id])
-    if body.present?
-      if body.update_rec(params)
-        render json: body.api.bodies
-      else
-        render_json('error', 600, 'Record update failed')
-      end
+
+    if body&.update_rec(params)
+      render json: body.api.bodies, status: :ok
     else
-      render_json('error', 404, 'Body not found')
+      render_json(:unprocessable_entity, 'Record update failed')
     end
   end
 
   def destroy
     body = Body.find(params[:id])
     api = body.api
+
     if body.destroy
-      render json: api.bodies
+      render json: api.bodies, status: :ok
     else
-      render_json('error', 404, 'Delete failed')
+      render_json(:unprocessable_entity, 'Delete failed')
     end
-  end
-
-  private
-
-  def render_json(status, code, message)
-    render json: {
-      status: status,
-      code: code,
-      message: message
-    }
   end
 end
