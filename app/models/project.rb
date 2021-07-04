@@ -9,6 +9,10 @@ class Project < ApplicationRecord
   scope :active, -> { where(archived: false) }
 
   def version_details
-    versions.active.map { |v| { id: v.id, name: v.name } }
+    versions.active.map { |version| { id: version.id, name: version.name } }
+  end
+
+  def archive_record
+    self.update(archived: true)
   end
 end

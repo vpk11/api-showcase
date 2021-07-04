@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+
   def current_user
     User.find_by(id: session[:user_id])
   end
@@ -17,5 +19,25 @@ class ApplicationController < ActionController::Base
 
   def authorized
     redirect_to '/welcome' unless logged_in?
+  end
+
+  private
+
+  def login_user
+    session[:user_id] = @user.id
+    redirect_to new_project_path
+  end
+
+  def logout_user
+    session[:user_id] = nil
+    redirect_to '/welcome'
+  end
+
+  def render_not_found_response(exception)
+    render json: { success: false, error: exception.message }, status: :not_found
+  end
+
+  def render_json(status, message)
+    render json: { message: message }, status: status
   end
 end

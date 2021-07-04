@@ -3,44 +3,43 @@
 # Archives Controller
 class ArchivesController < ApplicationController
   def update
-    item = request.headers['Record']
-    case item
-    when 'Version'
-      version = Version.find(params[:id])
-      version.active = false
-      version.deprecated = true
-      json_result(version, 'version') if version.save!
-    when 'Project'
-      project = Project.find(params[:id])
-      project.archived = true
-      json_result(project, 'project') if project.save!
-    when 'Api'
-      api = Api.find(params[:id])
-      api.archived = true
-      json_result(api, 'api') if api.save!
+    item = request.headers['record']
+    
+    if updatable_records.include? item
+      archive_and_build_json(item)
     else
-      render json: { message: 'invalid record' }, status: 422
+      render_json(:unprocessable_entity, t('invalid_record'))
     end
   end
 
   private
 
-  def json_result(item, name)
-    case name
-    when 'project'
-      user = item.user
-      @results = user.project_details
-      render json: @results
-    when 'version'
-      project = item.project
-      @results = project.version_details
-      render json: @results
-    when 'api'
-      version = item.version
-      @results = version.api_details
-      render json: @results
-    else
-      render json: { message: 'some random error' }
+  def archive_and_build_json(item)
+    item_record = item.constantize.find(params[:id])
+    json_result(item_record) if item_record.archive_record
+  end
+
+  def json_result(item_record)
+    results = build_result(item_record)
+
+    render json: results, status: :ok
+  end
+
+  def updatable_records
+    %w[Version Project Api]
+  end
+
+  def build_result(item_record)
+    case item_record.class.name
+    when 'Project'
+      user = item_record.user
+      user.project_details
+    when 'Version'
+      project = item_record.project
+      project.version_details
+    when 'Api'
+      version = item_record.version
+      version.api_details
     end
   end
 end

@@ -13,12 +13,9 @@ class VersionsController < ApplicationController
   end
 
   def create
-    version = Version.new(
-      name: params[:name],
-      active: params[:active] || false,
-      project_id: params[:project_id]
-    )
-    if version.save!
+    version = Version.new(version_params)
+
+    if version.save
       redirect_to projects_path
     else
       @project = Project.find(params[:project_id])
@@ -30,23 +27,18 @@ class VersionsController < ApplicationController
     @results = version.api_details
   end
 
-  def edit; end
-
   def update
     version = Version.find(params[:id])
-    version.active = false
-    version.deprecated = true
-    version_json(version) if version.save!
+    version_json(version) if version.update(version_params)
   end
 
   def destroy
     version = Version.find(params[:id])
+
     if version.destroy
       version_json(version)
     else
-      render json: {
-        status: 'error', code: 600, message: 'Record deletion failed'
-      }
+      render_json(:unprocessable_entity, 'Record deletion failed')
     end
   end
 
@@ -55,6 +47,10 @@ class VersionsController < ApplicationController
   def version_json(version)
     project = version.project
     results = project.version_details
-    render json: results
+    render json: results, status: :ok
+  end
+
+  def version_params
+    params.permit(:name, :active, :project_id)
   end
 end
