@@ -13,23 +13,15 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to projects_path
+      login_user
     else
-      @error = if @user
-                 'Wrong Password'
-               else
-                 "User doesn't exist. Try SignUp!"
-               end
+      @error = (@user ? t('wrong_password_error') : t('user_doesnt_exist_error'))
       render :new
     end
   end
 
-  def login; end
-
   def logout
-    session[:user_id] = nil
-    redirect_to '/welcome'
+    logout_user
   end
 
   def welcome

@@ -1,11 +1,13 @@
-<%= react_component(
-  'ShowApi', 
-  {
-    api: @api,
-    version: @version,
-    params: @parameters,
-    headers: @headers,
-    bodies: @bodies,
-    responses: @responses,
-  })
-%>
+<% present(@api) do |api| %>
+  <%= react_component(
+    'ShowApi',
+    {
+      api: api,
+      version: api.version,
+      params: api.params,
+      headers: api.headers,
+      bodies: api.bodies,
+      responses: api.responses,
+    })
+  %>
+<% end %>

@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  app_title: "Showcase"
+  no_script_warning: "If you're seeing this message, that means <strong>JavaScript has been disabled on your browser</strong>, please <strong>enable JS</strong> to make this app work."
+  wrong_password_error: "Wrong Password"
+  user_doesnt_exist_error: "User doesn't exist. Try SignUp!"
+  invalid_record: "Invalid record"
