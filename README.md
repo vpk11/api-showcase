@@ -36,6 +36,11 @@ And now you can visit the site with the URL http://localhost:3000
 docker-compose up -d
 ```
   > `-d` will run the containers in the background 
+
+- Docker in production:
+```shell
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
 - Check container status:
 ```shell
 docker-compose ps
