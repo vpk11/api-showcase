@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= javascript_pack_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 <% if @user&.errors&.full_messages.present? %>
   <%= react_component('SignUp', { alertList: @user.errors.full_messages, alertType: 'error', showAlert: true, alertMessage: 'Error' }) %>

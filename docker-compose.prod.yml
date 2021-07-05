@@ -1,0 +1,6 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile.prod
+    environment:
+      RAILS_ENV: production
