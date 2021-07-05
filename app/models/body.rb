@@ -33,7 +33,7 @@ class Body < ApplicationRecord
       {
         body_type: params[:body_type],
         graphql_query: params[:graphql_query],
-        graphql_variables: params[:graphql_variables],
+        graphql_variable: params[:graphql_variable],
         api_id: params[:api_id],
         description: params[:description]
       }

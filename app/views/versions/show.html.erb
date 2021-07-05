@@ -1,1 +1,1 @@
-<%= react_component('ApiIndex', { apis: @results, versionId: @results.first[:version_id]}) %>
+<%= react_component('ApiIndex', { apis: @results, versionId: params[:id].to_i }) %>

@@ -4,21 +4,18 @@
 class ProjectsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
-    user = User.first
-    @results = user.project_details
+    @results = current_user.project_details
   end
 
   def new
-    @user = User.first
+    @user = current_user
     @account = @user.account
   end
 
   def create
-    project = Project.new(
-      name: params[:name], description: params[:description],
-      user_id: params[:user_id], account_id: params[:account_id]
-    )
-    if project.save!
+    project = Project.new(project_params)
+
+    if project.save
       redirect_to projects_path
     else
       @user = User.find(params[:user_id])
@@ -28,18 +25,16 @@ class ProjectsController < ApplicationController
 
   def update
     project = Project.find(params[:id])
-    project.archived = true
-    project_json(project) if project.save!
+    project_json(project) if project.update(update_project_params)
   end
 
   def destroy
     project = Project.find(params[:id])
+    
     if project.destroy
       project_json(project)
     else
-      render json: {
-        status: 'error', code: 600, message: 'Record deletion failed'
-      }
+      render_json(:unprocessable_entity, 'Record deletion failed')
     end
   end
 
@@ -48,6 +43,14 @@ class ProjectsController < ApplicationController
   def project_json(project)
     user = project.user
     @results = user.project_details
-    render json: @results
+    render json: @results, status: :ok
+  end
+
+  def update_project_params
+    params.require(:project).permit(:name, :description)
+  end
+
+  def project_params
+    params.permit(:name, :description, :user_id, :account_id)
   end
 end

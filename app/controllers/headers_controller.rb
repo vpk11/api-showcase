@@ -3,53 +3,37 @@
 # Headers Controller
 class HeadersController < ApplicationController
   def create
-    header = Header.new(
-      key: params[:key],
-      value_object: params[:value_object],
-      api_id: params[:api_id],
-      description: params[:description]
-    )
+    header = Header.new(header_params)
     if header.save
       api = Api.find params[:api_id]
-      render json: api.headers
+      render json: api.headers, status: :ok
     end
   end
 
   def update
     header = Header.find(params[:id])
-    if header.present?
-      if header.update_attributes(
-        key: params[:key],
-        value_object: params[:value_object],
-        api_id: params[:api_id],
-        description: params[:description]
-      )
-        render json: header.api.headers
-      else
-        render_json('error', 600, 'Record update failed')
-      end
+
+    if header&.update(header_params)
+      render json: header.api.headers, status: :ok
     else
-      render_json('error', 404, 'Header not found')
+      render_json(:unprocessable_entity, 'Record update failed')
     end
   end
 
   def destroy
     header = Header.find(params[:id])
     api = header.api
+
     if header.destroy
       render json: api.headers
     else
-      render_json('error', 404, 'Delete failed')
+      render_json(:unprocessable_entity, 'Delete failed')
     end
   end
 
   private
 
-  def render_json(status, code, message)
-    render json: {
-      status: status,
-      code: code,
-      message: message
-    }
+  def header_params
+    params.permit(:key, :value_object, :api_id, :description)
   end
 end

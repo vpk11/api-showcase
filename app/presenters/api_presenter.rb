@@ -1,0 +1,2 @@
+class ApiPresenter < BasePresenter
+end

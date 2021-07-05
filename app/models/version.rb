@@ -18,4 +18,8 @@ class Version < ApplicationRecord
       }
     end
   end
+
+  def archive_record
+    self.update(active: false, deprecated: true)
+  end
 end
