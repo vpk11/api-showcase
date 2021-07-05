@@ -1,4 +1,4 @@
-module JWT
+module Jwt
   class Authenticator
     def self.call(headers)
       token = authenticate_header(headers)
