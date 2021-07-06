@@ -33,4 +33,5 @@ RUN bundle check || bundle install
 COPY package.json yarn.lock ./
 RUN yarn install --check-files
 COPY . ./
+RUN chmod +x ./entrypoints/docker-entrypoint.sh
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

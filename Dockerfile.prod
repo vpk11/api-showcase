@@ -34,4 +34,5 @@ COPY package.json yarn.lock ./
 RUN yarn install --check-files
 COPY . ./
 RUN bundle exec rails webpacker:compile RAILS_ENV=production
+RUN chmod +x ./entrypoints/docker-entrypoint-prod.sh
 ENTRYPOINT ["./entrypoints/docker-entrypoint-prod.sh"]
