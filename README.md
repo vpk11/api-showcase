@@ -1,6 +1,6 @@
 # API Showcase
 
-[![GitHub Super-Linter](https://github.com/vpk11/api-showcase/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Lint Code Base](https://github.com/vpk11/api-showcase/actions/workflows/linter.yml/badge.svg)](https://github.com/vpk11/api-showcase/actions/workflows/linter.yml)
 
 
 > A Rails app built to effectively document API's with less pain. Used react-rails gem for frontend.
