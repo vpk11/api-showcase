@@ -30,6 +30,8 @@ jobs:
     name: Lint Code Base
     # Set the agent to run on
     runs-on: ubuntu-latest
+    env:
+      VALIDATE_MARKDOWN: false
 
     ##################
     # Load all steps #
