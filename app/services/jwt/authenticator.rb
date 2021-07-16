@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Authenticator
     def self.call(headers)

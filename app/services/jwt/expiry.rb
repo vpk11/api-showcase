@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Expiry
     def self.access_expiry

@@ -34,7 +34,7 @@ class ResponsesController < ApplicationController
   end
 
   private
-  
+
   def response_params
     params.permit(:data, :code, :status, :api_id, :description)
   end

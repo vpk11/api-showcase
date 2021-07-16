@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Refresher
     def self.refresh!(refresh_token, user)

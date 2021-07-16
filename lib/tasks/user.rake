@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 namespace :user do
   task create: :environment do
     puts "======================Started at: #{Time.now}==========================\n"
     puts "======================Creating admin user==========================\n"
-    account = Account.create(name: "admin", archived: false)
+    account = Account.create(name: 'admin', archived: false)
     user = User.create(
       name: 'admin',
       email: 'admin@example.com',
