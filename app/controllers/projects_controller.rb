@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     project = Project.find(params[:id])
-    
+
     if project.destroy
       project_json(project)
     else

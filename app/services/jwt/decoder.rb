@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Decoder
     def self.decode_access_token!(access_token, verify: true)

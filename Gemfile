@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -53,9 +55,16 @@ group :test do
   gem 'webdrivers'
 end
 
+group :rubocop do
+  gem 'rubocop', '>= 0.90', require: false
+  gem 'rubocop-packaging', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "cancancan", "~> 3.1"
+gem 'cancancan', '~> 3.1'
 
-gem "jwt", "~> 2.2"
+gem 'jwt', '~> 2.2'

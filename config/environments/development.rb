@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -10,9 +12,9 @@ Rails.application.configure do
   # adding localhost
   config.hosts.clear
 
-  #CamelCase props send to react
+  # CamelCase props send to react
   config.react.camelize_props = true
-  
+
   config.cache_classes = false
 
   # Do not eager load code on boot.

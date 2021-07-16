@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Encoder
     def self.call(user, token_type)
@@ -42,7 +44,7 @@ module Jwt
 
     def self.refresh_token_expiry
       (token_issued_at + Expiry.refresh_expiry).to_i
-    end 
+    end
 
     def self.token_issued_at
       Time.current

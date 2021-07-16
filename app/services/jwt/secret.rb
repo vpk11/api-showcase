@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jwt
   class Secret
     def self.access_secret
