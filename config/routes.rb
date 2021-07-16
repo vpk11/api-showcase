@@ -23,4 +23,12 @@ Rails.application.routes.draw do
   resources :versions do
     resources :apis, only: %i[index new create show edit update]
   end
+
+  namespace :apis do
+    namespace :v1 do
+      post 'login', to: 'authentication#create'
+      post 'register', to: 'users#create'
+      resources :users
+    end
+  end
 end

@@ -68,3 +68,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'cancancan', '~> 3.1'
 
 gem 'jwt', '~> 2.2'
+
+gem 'blueprinter', '~> 0.25.3'
