@@ -17,6 +17,11 @@ class User < ApplicationRecord
       }
     end
   end
+
+  def upgarade_token_version
+    self.update(token_version: token_version + 1, token_issued_at: Time.current)
+  end
+
   private
 
   def ensure_account_exists

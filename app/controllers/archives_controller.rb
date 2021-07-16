@@ -4,7 +4,7 @@
 class ArchivesController < ApplicationController
   def update
     item = request.headers['record']
-    
+
     if updatable_records.include? item
       archive_and_build_json(item)
     else
