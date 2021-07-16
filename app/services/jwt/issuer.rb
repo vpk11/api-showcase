@@ -5,7 +5,7 @@ module Jwt
     def self.call(user)
       user.upgarade_token_version
 
-      access_token, jti, exp = Encoder.call(user, 'access_token')
+      access_token, _jti, _exp = Encoder.call(user, 'access_token')
       refresh_token = Encoder.call(user, 'refresh_token')
 
       [access_token, refresh_token]
