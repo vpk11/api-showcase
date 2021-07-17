@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       post 'signup', to: 'users#create'
       get 'profile', to: 'users#show'
       get 'profile/edit', to: 'users#edit'
+      get 'refresh_token', to: 'authentication#update'
 
       resources :users, only: [:update]
       resources :projects

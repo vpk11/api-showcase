@@ -2,11 +2,11 @@
 
 module Jwt
   class Authenticator
-    def self.call(headers)
+    def self.call(headers, token_type: 'access_token')
       token = authenticate_header(headers)
       raise Errors::Jwt::MissingToken unless token.present?
 
-      decoded_token = Decoder.decode_access_token!(token)
+      decoded_token = Decoder.method("decode_#{token_type}!").call(token)
       user = authenticate_user_from_token(decoded_token)
       raise Errors::Unauthorized unless user.present?
 
