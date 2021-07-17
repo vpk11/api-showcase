@@ -30,7 +30,7 @@ module Apis
       end
 
       def edit
-        render json: { data: { project_serializer(@project, root: :project) }, schema: Project.schema_json },
+        render json: { data: project_serializer(@project, root: :project), schema: Project.schema_json },
                status: :ok
       end
 

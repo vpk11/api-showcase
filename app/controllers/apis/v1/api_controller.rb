@@ -5,14 +5,13 @@ module Apis
     class ApiController < ActionController::API
       before_action :authenticate
 
+      rescue_from Exception, with: :handle_exception
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       rescue_from ActionController::ParameterMissing, with: :parameter_missing
       rescue_from Errors::AuthenticateError, with: :handle_unauthenticated
       rescue_from Errors::Unauthorized, with: :handle_unauthorized
       rescue_from Errors::Jwt::MissingToken, with: :handle_missing_token
       rescue_from Errors::Jwt::InvalidToken, with: :handle_invalid_token
-
-      # rescue_from Exception, with: :handle_exception
 
       private
 
