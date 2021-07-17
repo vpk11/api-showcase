@@ -18,7 +18,7 @@
         "password",
         "password_confirmation"
       ],
-      "editable": [
+      "updatable": [
         "email",
         "first_name",
         "middle_name",

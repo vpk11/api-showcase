@@ -13,7 +13,7 @@
         "name",
         "description"
       ],
-      "editable": [
+      "updatable": [
         "name",
         "description",
         "archived"
