@@ -28,8 +28,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/', to: 'projects#index'
       post 'login', to: 'authentication#create'
-      post 'register', to: 'users#create'
-      resources :users
+      get 'signup', to: 'users#new'
+      post 'signup', to: 'users#create'
+      get 'profile', to: 'users#show'
+      get 'profile/edit', to: 'users#edit'
+
+      resources :users, only: [:update]
       resources :projects
     end
   end

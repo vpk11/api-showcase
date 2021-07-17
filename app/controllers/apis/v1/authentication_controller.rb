@@ -12,7 +12,7 @@ module Apis
 
         raise Errors::AuthenticateError unless user.authenticate(authenticate_params[:password])
 
-        render json: UserSerializer.render_as_json(user, root: :user, view: :with_tokens),
+        render json: { data: UserSerializer.render_as_json(user, root: :user, view: :with_tokens) },
                status: :created
       end
 

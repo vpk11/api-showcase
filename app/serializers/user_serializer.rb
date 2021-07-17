@@ -10,4 +10,8 @@ class UserSerializer < Blueprinter::Base
       Jwt::Issuer.call(user)
     end
   end
+
+  view :with_name_fields do
+    fields :first_name, :middle_name, :last_name
+  end
 end
