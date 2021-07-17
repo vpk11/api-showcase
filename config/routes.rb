@@ -26,9 +26,11 @@ Rails.application.routes.draw do
 
   namespace :apis do
     namespace :v1 do
+      get '/', to: 'projects#index'
       post 'login', to: 'authentication#create'
       post 'register', to: 'users#create'
       resources :users
+      resources :projects
     end
   end
 end

@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "required": ["project"],
+  "properties": {
+    "project": {
+      "$ref": "#/definitions/project"
+    }
+  },
+  "definitions": {
+    "project": {
+      "type": "object",
+      "creatable": [
+        "name",
+        "description"
+      ],
+      "editable": [
+        "name",
+        "description",
+        "archived"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
