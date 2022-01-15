@@ -15,9 +15,9 @@ module Jwt
         {
           user_id: user.id,
           token_version: user.token_version,
-          jti: jti,
+          jti:,
           iat: token_issued_at.to_i,
-          exp: exp
+          exp:
         },
         Secret.access_secret
       )

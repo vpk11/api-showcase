@@ -11,8 +11,8 @@ application up and running.
 
 The setups steps expect following to be installed on the system.
 
-- Ruby [3.0.0]
-- Rails [6.1.4]
+- Ruby [3.1.0]
+- Rails [7.0.1]
 
 ##### 1. Check out the repository
 
@@ -20,7 +20,7 @@ The setups steps expect following to be installed on the system.
 
 ##### 2. Create database.yml file Copy the sample database.yml file and edit the database configuration as required.
 
-`cp config/database.yml.sample config/database.yml`
+`cp config/database.yml.example config/database.yml`
 
 ##### 3. Install the required gems using
 

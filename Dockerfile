@@ -1,5 +1,5 @@
-FROM ruby:3.0.0-alpine
-ENV BUNDLER_VERSION=2.2.21
+FROM ruby:3.1.0-alpine
+ENV BUNDLER_VERSION=2.3.3
 RUN apk add --update --no-cache \
       binutils-gold \
       build-base \
@@ -25,7 +25,7 @@ RUN apk add --update --no-cache \
       py-pip \
       tzdata \
       yarn
-RUN gem install bundler -v 2.2.21
+RUN gem install bundler -v 2.3.3
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries

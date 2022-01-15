@@ -10,7 +10,7 @@ module Jwt
     end
 
     def self.decode_access_token(access_token, verify: true)
-      decode_access_token!(access_token, verify: verify)
+      decode_access_token!(access_token, verify:)
     rescue StandardError
       nil
     end
@@ -23,7 +23,7 @@ module Jwt
     end
 
     def self.decode_refresh_token(refresh_token, verify: true)
-      decode_refresh_token!(refresh_token, verify: verify)
+      decode_refresh_token!(refresh_token, verify:)
     rescue StandardError
       nil
     end
