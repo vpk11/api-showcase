@@ -37,6 +37,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_json(status, message)
-    render json: { message: message }, status: status
+    render json: { message: }, status:
   end
 end
