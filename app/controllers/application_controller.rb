@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def login_user
     session[:user_id] = @user.id
-    redirect_to new_project_path
+    redirect_to root_path
   end
 
   def logout_user
