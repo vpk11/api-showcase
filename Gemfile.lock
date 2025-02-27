@@ -191,7 +191,7 @@ GEM
       railties (>= 3.2)
       tilt
     regexp_parser (2.2.0)
-    rexml (3.2.5)
+    rexml (3.3.9)
     rubocop (1.24.1)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
